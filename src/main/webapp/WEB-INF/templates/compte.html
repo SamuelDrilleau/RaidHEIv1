@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<title>Raid HEI - Le Raid</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="images/logo.png">
+<style>
+body {font-family: "Lato", sans-serif, font-size:12px;}
+.mySlides {display: none}
+ul{text-align: left;}
+</style>
+<body>
+
+<!-- Navbar -->
+<nav class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <a href="index"><button class="w3-padding-large w3-button" title="More">LE RAID</button></a>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="equipe" class="w3-bar-item w3-button">L'EQUIPE</a>
+        <a href="lieu" class="w3-bar-item w3-button">LE LIEU</a>
+        <a href="precedent" class="w3-bar-item w3-button">RAIDS PRECEDENTS</a>
+        <a href="epreuves" class="w3-bar-item w3-button">EPREUVES</a>
+      </div>
+    </div>
+    <a href="partenariat" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PARTENARIATS</a>
+    <a href="engagements" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ENGAGEMENTS</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">INFORMATIONS</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="infos" class="w3-bar-item w3-button">INFOS PRATIQUES</a>
+        <a href="materiel" class="w3-bar-item w3-button">MATERIEL</a>
+        <a href="#" class="w3-bar-item w3-button">GALERIE</a>
+      </div>
+    </div>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">INSCRIPTIONS</button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="inscription1" class="w3-bar-item w3-button">INSCRIPTION ET CREATION D'UNE EQUIPE</a>
+        <a href="inscription2" class="w3-bar-item w3-button">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>
+        <a href="inscription3" class="w3-bar-item w3-button">INSCRIPTIONS SOLO</a>
+      </div>
+      <a href="connexion" class="w3-hover-red w3-hide-small w3-right" style="padding: 7px 24px;"><i class="fa fa-user-circle fa-2x"></i></a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Raid Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    
+
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">COMPTE</h2>
+      <p class="w3-justify">
+        Bienvenue sur votre espace personnel heib<br><br>
+
+        Vous pouvez retrouver toutes les informations relatives aux inscriptions ici<br><br>
+
+        Vous faîtes actuellement parti de l'équipe : raidhei pour un parcours de type Aventure
+      </p>
+      <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
+        <div>
+          <h3>ETAT DE VOTRE INSCRIPTION :</h3>
+          <p>Ces informations seront mises à jour régulièrement dès votre inscription</p>
+          <ul>
+            <li>Attestation de lecture du règlement signée et remise: NON (Télécharger le <a href="../pdf/reglementRaidHEI2018.pdf">règlement</a>  et l'<a href="../pdf/attestationreglement.pdf">attestation de sa lecture</a>)</li>
+            <li>Certificat médical valide: NON</li>
+            <li>Certificat médical valide: NON<br>Payez votre inscription en ligne avec <a href="">PUMPKIN</a> en utilisant le code promo raidhei</li>
+            <li>Caution payée: NON</li>
+            <li>Certificat de scolarité ou carte étudiante valide(Recto/Verso)(pour les étudiants): NON</li>
+            <li>Votre équipe est incomplète (4 personnes necéssaires)</li>
+          </ul>
+        </div>
+        <div>
+          <h3>ENVOIE DE DOCUMENTS :</h3>
+          <p>Vos documents doivent être au format PDF et ne pas dépasser 2 Mo</p>
+          <form>
+          <ul>
+            <li>Attestation de lecture du règlement signée : <input type="file" name="Regl" /></li>
+            <li>Certificat médical : <input type="file" name="certifMed" /></li>
+            <li>Certificat de Scolarité/Carte étudiante : <input type="file" name="certifSco" /></li>
+          </ul>
+          <input type="submit" name="valider">
+          </form>
+        </div>
+        <div>
+          <h3>VOS INFORMATIONS :</h3>
+          <ul>
+            <li>Votre adresse mail :</li>
+            <li>Vous prenez le bus :</li>
+            <li> Vous louez un vélo :</li>
+            <li>Téléphone :</li>
+            <li>Statut :</li>
+            <li>Ecole :</li>
+            <li>Contact en cas d'urgence</li>
+            <li>Taille :</li>
+          </ul>
+        </div>
+      </div>
+
+  <!-- The Contact Section -->
+  <div class="w3-white" id="tour">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">CONTACT</h2>
+      <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
+        <div class="w3-third w3-margin-bottom">
+          <i class="fa fa-map-marker fa-2x" style="width:30px"></i> Chicago, US
+        </div>
+        <div class="w3-third w3-margin-bottom">
+          <i class="fa fa-phone fa-2x" style="width:30px"></i> Phone: +00 151515
+        </div>
+        <div class="w3-third w3-margin-bottom">
+          <i class="fa fa-envelope fa-2x" style="width:30px"> </i> Email: mail@mail.com
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-center w3-opacity w3-xlarge">
+  <i class="fa fa-facebook-official fa-2x w3-hover-opacity" style="color: #0e3561;"></i>
+  <i class="fa fa-instagram fa-2x w3-hover-opacity"></i>
+  <i class="fa fa-snapchat fa-2x w3-hover-opacity" style="color: #f2b809"></i>
+  <i class="fa fa-pinterest-p fa-2x w3-hover-opacity" style="color: #c00;"></i>
+  <i class="fa fa-twitter fa-2x w3-hover-opacity" style="color: #09c;"></i>
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>
