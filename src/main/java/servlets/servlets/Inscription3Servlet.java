@@ -42,11 +42,11 @@ public class Inscription3Servlet extends HttpServlet {
         String nomEnt;
         String nomUrg;
         String telUrg;
-        String bds;
-        String vtt;
-        String bus;
+        int bds;
+        int vtt;
+        int bus;
         String tshirt;
-        String fftri;
+        int fftri;
 
         mail = request.getParameter("email");
         mdp1 = DigestUtils.sha256Hex(request.getParameter("mdp1"));
@@ -59,13 +59,13 @@ public class Inscription3Servlet extends HttpServlet {
         nomEnt = request.getParameter("ent/ecole");
         nomUrg = request.getParameter("nomUrg");
         telUrg = request.getParameter("telUrg");
-        bds = request.getParameter("bds");
-        vtt = request.getParameter("vtt");
-        bus = request.getParameter("bus");
-        tshirt = request.getParameter("tshirt");
-        fftri = request.getParameter("fftri");
+        bds=Integer.parseInt(request.getParameter("bds"));
+        vtt=Integer.parseInt(request.getParameter("vtt"));
+        bus=Integer.parseInt(request.getParameter("bus"));
+        tshirt=request.getParameter("tshirt");
+        fftri=Integer.parseInt(request.getParameter("fftri"));
 
-        Participant participant = new Participant(mail, mdp1, nom, prenom, sexe, tel, statut, nomEnt, nomUrg, telUrg, bds, vtt, bus, tshirt, fftri, "Indiv","","","");
+        Participant participant = new Participant(mail, mdp1, nom, prenom, sexe, tel, statut, nomEnt, nomUrg, telUrg, bds, vtt, bus, tshirt, fftri, "Indiv",0,0,0,0,0);
 
         UserLibrary.getInstance().addParticipant(participant);
 
@@ -197,23 +197,23 @@ public class Inscription3Servlet extends HttpServlet {
                 "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required=\"\">\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "    <label>Amenez-vous votre propre VTT ?</label>\n" +
                 "    <select name=\"vtt\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "    <label>Venez-vous avec le bus mis à votre disposition ?</label>\n" +
                 "    <select name=\"bus\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "      <label>Etes-vous membre de la FFTri ?</label>\n" +
                 "      <select name=\"fftri\">\n" +
-                "          <option value=\"oui\">Oui</option>\n" +
-                "          <option value=\"non\">Non</option>\n" +
+                "          <option value=\"1\">Oui</option>\n" +
+                "          <option value=\"0\">Non</option>\n" +
                 "      </select>\n" +
                 "    <label>Quelle est votre taille de t-shit ?</label>\n" +
                 "    <select name=\"tshirt\">\n" +

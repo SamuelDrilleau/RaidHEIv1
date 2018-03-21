@@ -100,6 +100,8 @@ public class AffichageServlet extends HttpServlet {
                 "<th>attestation</th>\n" +
                 "<th>certificat médical</th>\n" +
                 "<th>certificat scolaire</th>\n" +
+                "<th>caution</th>\n" +
+                "<th>paiement</th>\n" +
                 "</tr>\n" +
                 "</thead>\n" +
                 "<tbody>\n"+

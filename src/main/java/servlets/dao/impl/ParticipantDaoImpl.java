@@ -111,7 +111,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
                         rs.getInt("certifMed"),
                         rs.getInt("certifSco"),
                         rs.getInt("attestation"),
-                        rs.getInt("cautionn"),
+                        rs.getInt("caution"),
                         rs.getInt("paiement"));
             }
 
