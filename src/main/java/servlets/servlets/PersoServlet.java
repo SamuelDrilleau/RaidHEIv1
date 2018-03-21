@@ -108,9 +108,14 @@ public class PersoServlet extends HttpServlet {
                 "    <h3>Etat de votre inscription</h3>\n" +
                 "    <p class=\"w3-justify\">Ces informations seront mises à jour régulièrement dès votre inscription</p>\n" +
                 "    <ul>\n" +
-                "    \t<li>Attestation de lecture du règlement signée et remise:"); out.println(user.getAttestation()); out.println("(Télécharger le règlement et l'attestation de sa lecture)</li>\n" +
-                "    \t<li>Certificat médical valide: "); out.println(user.getCertifMed()); out.println("</li>\n" +
-                "    \t<li>Certificat de scolarité ou carte étudiante valide(Recto/Verso)(pour les étudiants): "); out.println(user.getCertifSco()); out.println("NON</li>\n" +
+                "    \t<li>Attestation de lecture du règlement signée et remise:");
+                out.println(convertir(user.getAttestation()));
+                out.println("(Télécharger le règlement et l'attestation de sa lecture)</li>\n" +
+                "    \t<li>Certificat médical valide: ");
+                out.println(convertir(user.getCertifMed())); out.println("</li>\n" +
+                "    \t<li>Certificat de scolarité ou carte étudiante valide(Recto/Verso)(pour les étudiants): ");
+                out.println(convertir(user.getCertifSco()));
+                out.println("</li>\n" +
                 "    </ul>\n" +
                 "    <h3>Envoi de documents :</h3>\n" +
                 "    <p class=\"w3-justify\">Vos documents doivent être au format PDF et ne pas dépasser 2 Mo</p>\n" +
@@ -187,6 +192,14 @@ public class PersoServlet extends HttpServlet {
                 "</body>\n" +
                 "</html>\n");
 
+    }
+
+    public String convertir(int a){
+        if(a==1){
+            return "OUI";
+        }else{
+            return "NON";
+        }
     }
 
 }
