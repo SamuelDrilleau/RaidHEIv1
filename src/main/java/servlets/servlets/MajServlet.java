@@ -42,6 +42,9 @@ public class MajServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/admin.css\">\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/general.css\">\n" +
+                "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
                 "<style>\n" +
                 "    body {font-family: \"Lato\", sans-serif, font-size:12px;}\n" +
                 "    .mySlides {display: none}\n" +
@@ -93,14 +96,196 @@ public class MajServlet extends HttpServlet {
                 "<!-- Page content -->\n" +
                 "<div class=\"w3-content\" style=\"max-width:2000px;margin-top:46px\">\n" +
                 "\n" +
-                "    <form method=\"post\">\n" +
-                "        <label>Année ?</label>\n" +
-                "        <select name=\"annee\" id=\"annee\">\n" +
-                "            <option value=\"2017\">2017</option>\n" +
-                "            <option value=\"2018\">2018</option>\n" +
-                "        </select>\n" +
-                "<input type=\"submit\" value=\"Valider\" />"+
-                "    </form>\n" +
+                "    <div class=\"container\">\n" +
+                "\t<form method=\"post\">\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Date début</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"date\" name=\"debut\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Date fin</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"date\" name=\"fin\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Mail</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"email\" name=\"email\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Téléphone</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"tel\" name=\"tel\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Lieu</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"lieu\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Présentation lieu</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<textarea rows=\"8\" cols=\"50\" name=\"pres\"></textarea>\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Prix caution</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"number\" name=\"caution\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Prix étudiant early</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"number\" name=\"studentEarly\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Prix étudiant late</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"number\" name=\"studentLate\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Prix externe early</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"number\" name=\"externeEarly\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Prix externe late</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"number\" name=\"externeLate\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\t<div>\n" +
+                "\t\t\t<label>Contact Com 1</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"com1\" placeholder=\"NOM Prénom\">\n" +
+                "\t\t\t<input type=\"email\" name=\"mail1\" placeholder=\"email\">\n" +
+                "\t\t\t</div>\n" +
+                "\n" +
+                "\t\t\t<div>\n" +
+                "\t\t\t<label>Contact Com 2</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"com2\" placeholder=\"NOM Prénom\">\n" +
+                "\t\t\t<input type=\"email\" name=\"mail2\" placeholder=\"email\">\n" +
+                "\t\t\t</div>\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 1 vendredi</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve1\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 2 vendredi</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve2\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 1 samedi</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve3\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 2 samedi</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve4\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 3 samedi</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve5\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 1 dimanche</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve6\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Epreuve 2 diamanche</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"text\" name=\"epreuve7\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t\t<input type=\"submit\" name=\"\">\n" +
+                "\n" +
+                "\t</form>\n" +
+                "\t</div>\n" +
+                "\n" +
+                "\t<div class=\"container\">\n" +
+                "\t<form method=\"post\" action=\"maj\" enctype=\"multipart/form-data\">\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Equipe</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"file\" name=\"equipe\">\n" +
+                "\t\t\t<input type=\"submit\" multiple=\"multiple\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t</form>\n" +
+                "\t</div>\n" +
+                "\n" +
+                "\t<div class=\"container\">\n" +
+                "\t<form method=\"post\" action=\"maj\" enctype=\"multipart/form-data\">\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Plaquette</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"file\" name=\"plaquette\">\n" +
+                "\t\t\t<input type=\"submit\" multiple=\"multiple\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t</form>\n" +
+                "\t</div>\n" +
+                "\n" +
+                "\t<div class=\"container\">\n" +
+                "\t<form method=\"post\" action=\"maj\" enctype=\"multipart/form-data\">\t\n" +
+                "\n" +
+                "\t\t\n" +
+                "\t\t\t<label>Ancien raid</label>\n" +
+                "\t\t\n" +
+                "\t\t\n" +
+                "\t\t\t<input type=\"file\" name=\"plaquette\">\n" +
+                "\t\t\t<input type=\"submit\" multiple=\"multiple\">\n" +
+                "\t\t\n" +
+                "\n" +
+                "\t</form>\n" +
+                "\t</div>" +
                 "\n" +
                 "    <!-- End Page Content -->\n" +
                 "</div>\n" +

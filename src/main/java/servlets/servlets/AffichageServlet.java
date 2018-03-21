@@ -123,6 +123,8 @@ public class AffichageServlet extends HttpServlet {
             out.println("<th>"+liste.get(i).getAttestation()+"</th>");
             out.println("<th>"+liste.get(i).getCertifMed()+"</th>");
             out.println("<th>"+liste.get(i).getCertifSco()+"</th>");
+            out.println("<th>"+liste.get(i).getAttestation()+"</th");
+            out.println("<th>"+liste.get(i).getPaiement()+"</th");
         }
 
                 out.println("</tr>\n" +

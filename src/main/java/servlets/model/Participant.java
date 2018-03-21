@@ -14,17 +14,19 @@ public class Participant {
     private String nomEnt;
     private String nomUrg;
     private String telUrg;
-    private String bds;
-    private String vtt;
-    private String bus;
+    private int bds;
+    private int vtt;
+    private int bus;
     private String tshirt;
-    private String fftri;
+    private int fftri;
     private String nomEquipe;
-    private String attestation;
-    private String certifMed;
-    private String certifSco;
+    private int attestation;
+    private int certifMed;
+    private int certifSco;
+    private int caution;
+    private int paiement;
 
-    public Participant(String mail, String mdp, String nom, String prenom, String sexe, String tel, String statut, String nomEnt, String nomUrg, String telUrg, String bds, String vtt, String bus, String tshirt, String fftri, String nomEquipe, String attestation, String certifMed, String certifSco) {
+    public Participant(String mail, String mdp, String nom, String prenom, String sexe, String tel, String statut, String nomEnt, String nomUrg, String telUrg, int bds, int vtt, int bus, String tshirt, int fftri, String nomEquipe, int attestation, int certifMed, int certifSco, int caution, int paiement) {
         this.mail = mail;
         this.mdp = mdp;
         this.nom = nom;
@@ -44,6 +46,8 @@ public class Participant {
         this.attestation = attestation;
         this.certifMed = certifMed;
         this.certifSco = certifSco;
+        this.caution = caution;
+        this.paiement = paiement;
     }
 
     public String getMail() {
@@ -126,27 +130,27 @@ public class Participant {
         this.telUrg = telUrg;
     }
 
-    public String getBds() {
+    public int getBds() {
         return bds;
     }
 
-    public void setBds(String bds) {
+    public void setBds(int bds) {
         this.bds = bds;
     }
 
-    public String getVtt() {
+    public int getVtt() {
         return vtt;
     }
 
-    public void setVtt(String vtt) {
+    public void setVtt(int vtt) {
         this.vtt = vtt;
     }
 
-    public String getBus() {
+    public int getBus() {
         return bus;
     }
 
-    public void setBus(String bus) {
+    public void setBus(int bus) {
         this.bus = bus;
     }
 
@@ -158,11 +162,11 @@ public class Participant {
         this.tshirt = tshirt;
     }
 
-    public String getFftri() {
+    public int getFftri() {
         return fftri;
     }
 
-    public void setFftri(String fftri) {
+    public void setFftri(int fftri) {
         this.fftri = fftri;
     }
 
@@ -174,27 +178,43 @@ public class Participant {
         this.nomEquipe = nomEquipe;
     }
 
-    public String getAttestation() {
+    public int getAttestation() {
         return attestation;
     }
 
-    public void setAttestation(String attestation) {
+    public void setAttestation(int attestation) {
         this.attestation = attestation;
     }
 
-    public String getCertifMed() {
+    public int getCertifMed() {
         return certifMed;
     }
 
-    public void setCertifMed(String certifMed) {
+    public void setCertifMed(int certifMed) {
         this.certifMed = certifMed;
     }
 
-    public String getCertifSco() {
+    public int getCertifSco() {
         return certifSco;
     }
 
-    public void setCertifSco(String certifSco) {
+    public void setCertifSco(int certifSco) {
         this.certifSco = certifSco;
+    }
+
+    public int getCaution() {
+        return caution;
+    }
+
+    public void setCaution(int caution) {
+        this.caution = caution;
+    }
+
+    public int getPaiement() {
+        return paiement;
+    }
+
+    public void setPaiement(int paiement) {
+        this.paiement = paiement;
     }
 }

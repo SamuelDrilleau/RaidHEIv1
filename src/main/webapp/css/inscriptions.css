@@ -38,7 +38,6 @@ input[type=submit]:hover {
 }
 
 
-
 body {
     font-size: 12px;
     background-image:url("../images/terril.jpg");
@@ -53,5 +52,6 @@ footer{
     width:100%;
     z-index:1
 }
+
 
 

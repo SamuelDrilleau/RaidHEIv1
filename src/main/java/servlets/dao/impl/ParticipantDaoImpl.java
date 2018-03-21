@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ParticipantDaoImpl implements ParticipantDao {
     @Override
     public void addParticipant(Participant participant) {
-        String query ="INSERT INTO Participant(mail,mdp,nom,prenom,sexe,tel,statut,nomEnt,nomUrg,telUrg,bds,vtt,bus,tshirt,fftri,nomEquipe,certifMed,certifSco,attestation) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query ="INSERT INTO Participant(mail,mdp,nom,prenom,sexe,tel,statut,nomEnt,nomUrg,telUrg,bds,vtt,bus,tshirt,fftri,nomEquipe,certifMed,certifSco,attestation,caution,paiement) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -25,15 +25,17 @@ public class ParticipantDaoImpl implements ParticipantDao {
             stmt.setString(8,participant.getNomEnt());
             stmt.setString(9,participant.getNomUrg());
             stmt.setString(10,participant.getTelUrg());
-            stmt.setString(11,participant.getBds());
-            stmt.setString(12,participant.getVtt());
-            stmt.setString(13,participant.getBus());
+            stmt.setInt(11,participant.getBds());
+            stmt.setInt(12,participant.getVtt());
+            stmt.setInt(13,participant.getBus());
             stmt.setString(14,participant.getTshirt());
-            stmt.setString(15,participant.getFftri());
+            stmt.setInt(15,participant.getFftri());
             stmt.setString(16,participant.getNomEquipe());
-            stmt.setString(17,"NON");
-            stmt.setString(18,"NON");
-            stmt.setString(19,"NON");
+            stmt.setInt(17,0);
+            stmt.setInt(18,0);
+            stmt.setInt(19,0);
+            stmt.setInt(20,0);
+            stmt.setInt(21,0);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -60,15 +62,17 @@ public class ParticipantDaoImpl implements ParticipantDao {
                         rs.getString("nomEnt"),
                         rs.getString("nomUrg"),
                         rs.getString("telUrg"),
-                        rs.getString("bds"),
-                        rs.getString("vtt"),
-                        rs.getString("bus"),
+                        rs.getInt("bds"),
+                        rs.getInt("vtt"),
+                        rs.getInt("bus"),
                         rs.getString("tshirt"),
-                        rs.getString("fftri"),
+                        rs.getInt("fftri"),
                         rs.getString("nomEquipe"),
-                        rs.getString("certifMed"),
-                        rs.getString("certifSco"),
-                        rs.getString("attestation"));
+                        rs.getInt("certifMed"),
+                        rs.getInt("certifSco"),
+                        rs.getInt("attestation"),
+                        rs.getInt("cautionn"),
+                        rs.getInt("paiement"));
                 listParticipant.add(participant);
             }return listParticipant;
 
@@ -98,15 +102,17 @@ public class ParticipantDaoImpl implements ParticipantDao {
                         rs.getString("nomEnt"),
                         rs.getString("nomUrg"),
                         rs.getString("telUrg"),
-                        rs.getString("bds"),
-                        rs.getString("vtt"),
-                        rs.getString("bus"),
+                        rs.getInt("bds"),
+                        rs.getInt("vtt"),
+                        rs.getInt("bus"),
                         rs.getString("tshirt"),
-                        rs.getString("fftri"),
+                        rs.getInt("fftri"),
                         rs.getString("nomEquipe"),
-                        rs.getString("certifMed"),
-                        rs.getString("certifSco"),
-                        rs.getString("attestation"));
+                        rs.getInt("certifMed"),
+                        rs.getInt("certifSco"),
+                        rs.getInt("attestation"),
+                        rs.getInt("cautionn"),
+                        rs.getInt("paiement"));
             }
 
         } catch (SQLException e) {

@@ -101,7 +101,7 @@ public class ConnexionServlet extends HttpServlet {
                     "\n" +
                     "  <form method=\"post\">\n" +
                     "    <label >E-mail</label>\n" +
-                    "    <input type=\"email\" name=\"email\" required=\"\">\n" +
+                    "    <input type=\"email\" name=\"email\" autofocus required=\"\">\n" +
                     "    <label>Mot de passe</label>\n" +
                     "    <input type=\"password\" name=\"mdp\" required=\"\">\n" +
                     "    <input type=\"submit\" name=\"button\">\n" +
