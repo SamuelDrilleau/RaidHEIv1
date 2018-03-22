@@ -96,13 +96,6 @@ public class IndexServlet extends HttpServlet {
                 "    <h2 class=\"w3-wide\">LE RAID</h2>\n" +
                 "    <p class=\"w3-opacity\"><i>Le sport est le dépassement de soi. Le sport est l'école de vie.</i></p>\n" +
                 "    <p class=\"w3-justify\">Chaque année et cela depuis maintenant 23 éditions l'équipe organisatrice vous organise un weekend au coeur de la nature et dans un lieu unique et différent à chaque fois. Articulé autour de disciplines telles que  le trail, le run&bike, la course d'orientation, le VTT et le canoë , ce raid sera là pour prouver que chacun est capable de se dépasser. L'élément moteur de cette association est de vous faire partager sa passion pour le sport en équipe. Au cours de ces deux jours, vous aurez l'occasion de partager des moments forts en émotion avec vos coéquipiers et les autres raideurs.</p>\n" +
-                "    <div class=\"w3-row w3-padding-32\">\n" +
-                "<p class=\"w3-justify\">Nous sommes en ");
-
-                Raid raid = UserLibrary.getInstance().getRaid();
-                out.println(raid.getAnnee()+" !");
-
-                out.println("      <div class=\"w3-third\">\n" +
                 "        <p>Dépassement de soi</p>\n" +
                 "        <img src=\"images/heart.png\" class=\"w3-round w3-margin-bottom\" style=\"width:60%\">\n" +
                 "      </div>\n" +
