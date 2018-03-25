@@ -1,12 +1,6 @@
 CREATE DATABASE raidhei;
 USE raidhei;
 
-CREATE TABLE Photo(
-  id int NOT NULL AUTO_INCREMENT,
-  annee int NOT NULL,
-  nom char(50),
-  PRIMARY KEY (id));
-
 CREATE TABLE Raid(
   id int NOT NULL,
   annee int NOT NULL);

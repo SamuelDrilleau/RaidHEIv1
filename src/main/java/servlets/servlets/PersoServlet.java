@@ -1,11 +1,10 @@
 package servlets.servlets;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import servlets.manager.UserLibrary;
 import servlets.model.Participant;
 
@@ -14,32 +13,44 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.*;
 import java.util.List;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import static java.lang.System.out;
 
 @WebServlet(name = "perso")
 public class PersoServlet extends HttpServlet {
+    private static String bucketName     = "raidhei";
+    private static String keyName        = "AKIAIVMLLT7SRZUXXQZQ";
+    private static String uploadFileName = "C:\\Users\\SAMOUILLE\\Desktop\\test.docx";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");
+
+        AWSCredentials Credentials = new BasicAWSCredentials("AKIAIVMLLT7SRZUXXQZQ","YuRcHJhTFEE3b9vGhQ2d8HnhoDsb2mrtfAr7Faxx");
+        UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
+        S3client.uploadfile(Credentials);
+
+        /*
         try {
             ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
             List<FileItem> multifiles = sf.parseRequest(request);
 
-            for (FileItem item : multifiles) {
-                item.write(new File("/Users/DRILLEAU/Desktop/" +
-                        ""+ item.getName()));
-                out.println(item.getName());
+            for (int i=0;i<multifiles.size();i++) {
             }
         }
         catch(Exception e){
             out.println("e");
             }
-
-            response.sendRedirect("/prive/perso");
+        */
+        response.sendRedirect("/prive/perso");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

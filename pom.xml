@@ -88,9 +88,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.storj</groupId>
-            <artifactId>libstorj-java</artifactId>
-            <version>0.8.1</version>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
+            <version>1.11.301</version>
         </dependency>
 
     </dependencies>
