@@ -73,10 +73,10 @@ public class Inscription3Servlet extends HttpServlet {
 
         try {
             String host = "smtp.office365.com";
-            String user = "";
-            String pass = "";
+            String user = "raidhei";
+            String pass = "2014Opale";
             String to = mail;
-            String from = "";
+            String from = "raid@hei.fr";
             String subject = "Inscription RaidHEI";
             String messageText = "Your Is Test Email :";
             boolean sessionDebug = false;

@@ -5,20 +5,35 @@ import javax.sql.DataSource;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+import java.util.Properties;
+
 public class DataSourceProvider {
 
     private static MysqlDataSource dataSource;
 
     public static DataSource getDataSource() {
+
         if (dataSource == null) {
-            dataSource = new MysqlDataSource();
-            dataSource.setServerName("u3y93bv513l7zv6o.chr7pe7iynqr.eu-west-1.rds.amazonaws.com");
-            dataSource.setPort(3306);
-            dataSource.setDatabaseName("xipvstjcuakcwjha");
-            dataSource.setUser("peayqn98emob8vni");
-            dataSource.setPassword("vqan4nxqkb38zwb6");
+            initDataSource();
+        }
+        return dataSource;
     }
-		return dataSource;
+
+    private static void initDataSource(){
+        Properties jdbcProperties = new Properties();
+        try{
+            jdbcProperties.load(DataSourceProvider.class.getClassLoader().getResourceAsStream("jdbc.properties"));
+            dataSource = new MysqlDataSource();
+
+            dataSource.setServerName(jdbcProperties.getProperty("jdbc.server.host"));
+            dataSource.setPort(Integer.parseInt(jdbcProperties.getProperty("jdbc.server.port")));
+            dataSource.setDatabaseName(jdbcProperties.getProperty("jdbc.database"));
+            dataSource.setUser(jdbcProperties.getProperty("jdbc.user"));
+            dataSource.setPassword(jdbcProperties.getProperty("jdbc.password"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }
