@@ -7,6 +7,7 @@ import servlets.manager.UserLibrary;
 import servlets.model.Participant;
 import servlets.model.Raid;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +17,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContextEvent;
+
+
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 
@@ -26,6 +31,7 @@ public class IndexServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         PrintWriter out = response.getWriter();
+
 
         out.println("<!DOCTYPE html>\n" +
                 "<html>\n" +
