@@ -52,4 +52,10 @@ public class UserLibrary {
 
     public ArrayList<Photo> getAllPhoto(int annee){return PhotoDao.getAllPhoto(annee);}
 
+    public void updateAttestation(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
+
+    public void updateCertifMed(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
+
+    public void updatCertifSco(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
+
 }

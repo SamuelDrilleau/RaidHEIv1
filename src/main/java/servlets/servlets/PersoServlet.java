@@ -22,23 +22,37 @@ import java.io.*;
 @WebServlet(name = "perso")
 @MultipartConfig
 public class PersoServlet extends HttpServlet {
-    private static String bucketName     = "raidhei";
-    private static String keyName        = "AKIAIVMLLT7SRZUXXQZQ";
-    private static String uploadFileName = "C:\\Users\\SAMOUILLE\\Desktop\\test.docx";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");
-        AWSCredentials Credentials = new BasicAWSCredentials("AKIAIVMLLT7SRZUXXQZQ","YuRcHJhTFEE3b9vGhQ2d8HnhoDsb2mrtfAr7Faxx");
+        String label1 = request.getParameter("attestation");
+        String label2 = request.getParameter("certifMed");
+        String label3 = request.getParameter("certifSco");
+
+        String fichier = "";
+
+        if(label1.equals("attestation")){
+            fichier = "attestation";
+            UserLibrary.getInstance().updateAttestation(1,pseudoUtilisateurConnecte);
+        }else if (label2.equals("certifMed")){
+            fichier = "certifMed";
+            UserLibrary.getInstance().updateCertifMed(1,pseudoUtilisateurConnecte);
+        }else if(label3.equals("certifSco")){
+            fichier = "certifSco";
+            UserLibrary.getInstance().updatCertifSco(1,pseudoUtilisateurConnecte);
+        }
+
+        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ0","OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j0");
         UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
-        Part filePart = request.getPart("attestation"); // Retrieves <input type="file" name="file">
+
+        Part filePart = request.getPart(fichier); // Retrieves <input type="file" name="file">
         InputStream fileContent = filePart.getInputStream();
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("application/pdf");
         metadata.setContentLength(fileContent.available());
 
-        S3client.uploadfile(Credentials,"test", fileContent, metadata);
-
+        S3client.uploadfile(Credentials,"docUser/"+pseudoUtilisateurConnecte+"/"+fichier, fileContent, metadata);
 
         response.sendRedirect("/prive/perso");
     }
@@ -54,14 +68,18 @@ public class PersoServlet extends HttpServlet {
         out.println("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<title>Raid HEI - Le Raid</title>\n" +
+                "<head>"+
                 "<meta charset=\"UTF-8\">\n" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
-                "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/general.css\">\n" +
+                "<script>function changer(id){\n" +
+                "    document.getElementById(id).value = id;\n" +
+                "}</script>"+
+                "</head>"+
                 "<body>\n" +
                 "\n" +
                 "<!-- Navbar -->\n" +
@@ -120,30 +138,35 @@ public class PersoServlet extends HttpServlet {
                 "    </ul>\n" +
                 "    <h3>Envoi de documents :</h3>\n" +
                 "    <p class=\"w3-justify\">Vos documents doivent être au format PDF et ne pas dépasser 2 Mo</p>\n" +
-                "    <ul>\n" +
-                "\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n" +
-                "\t\t<li>\n" +
-                "\t\t\t<label>Attestation de lecture du règlement signée:</label>\n" +
-                "\t\t\t<input type=\"file\" name=\"attestation\" id=\"attestation\">\n" +
-                "\t\t\t<input type=\"submit\" name=\"submit\">\n" +
-                "\t\t</li>\n" +
-                "\t</form>\n" +
-                "\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n" +
-                "\t\t<li>\n" +
-                "\t\t\t<label>Certificat médical:</label>\n" +
-                "\t\t\t<input type=\"file\" name=\"certifMed\" id=\"certifMed\">\n" +
-                "\t\t\t<input type=\"submit\" name=\"submit\">\n" +
-                "\t\t</li>\n" +
-                "\t</form>\n" +
-                "\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n" +
-                "\t\t<li>\n" +
-                "\t\t\t<label>Certificat de Scolarité/Carte étudiante:</label>\n" +
-                "\t\t\t<input type=\"file\" name=\"certifSco\" id=\"certifSco\">\n" +
-                "\t\t\t<input type=\"submit\" name=\"submit\">\n" +
-                "\t\t\t\n" +
-                "\t\t</li>\n" +
-                "\t</form>\n" +
-                "</ul>"+
+                "    <ul>\n");
+                out.println("\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n"+"<li>"+ "<label>Attestation de lecture du règlement signée:</label>\n");
+                if(user.getAttestation()==0){
+                    out.println(
+                    "<input type=\"file\" name=\"attestationLabel\" >\n" +
+                            "<input onClick=\"changer(this.id)\" type=\"submit\" name=\"attestation\" id=\"attestation\" value=\"Envoyer\">\n");
+                }else{
+                    out.println("Merci d'avoir uploader votre attestation");
+                }
+                out.println("</li></form>");
+                out.println("\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n"+"<li>"+ "<label>Certificat médical : </label>\n");
+                if(user.getCertifMed()==0){
+                    out.println(
+                    "<input type=\"file\" name=\"certifMedLabel\" >\n" +
+                            "<input onClick=\"changer(this.id)\" type=\"submit\" name=\"certifMed\" id=\"certifMed\" value=\"Envoyer\">\n");
+                }else{
+                    out.println("Merci d'avoir uploader votre certificat médical");
+                }
+                out.println("</li></form>");
+                out.println("\t<form action=\"perso\" method=\"post\" enctype=\"multipart/form-data\">\n"+"<li>"+ "<label>Certificat de scolarité</label>\n");
+                if(user.getCertifSco()==0){
+                    out.println(
+                    "<input type=\"file\" name=\"certifScoLabel\">\n" +
+                            "<input onClick=\"changer(this.id)\" type=\"submit\" name=\"certifSco\" id=\"certifSco\" value=\"Envoyer\">\n");
+                }else{
+                    out.println("Merci d'avoir uploader votre certifiat de scolarité");
+                }
+                out.println("</li></form>");
+                out.println("</ul>"+
                 "    <h3>Vos information</h3>\n" +
                 "    <ul>\n" +
                 "    \t<li>Votre adresse mail :"); out.println(user.getMail()); out.println("</li>\n" +

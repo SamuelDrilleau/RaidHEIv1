@@ -123,7 +123,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public void delParticipant(String mail) {
-        String query = "DELETE FROM participants WHERE mail=?;";
+        String query = "DELETE FROM Participant WHERE mail=?;";
         try{
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
@@ -131,6 +131,49 @@ public class ParticipantDaoImpl implements ParticipantDao {
             ResultSet rs = statement.executeQuery();
 
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateAttestation(int value, String user) {
+        String query = "UPDATE Participant SET attestation=? WHERE mail=?";
+        try {
+            Connection connection = DataSourceProvider.getDataSource().getConnection();
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1,value);
+            stmt.setString(2,user);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void updateCertifMed(int value, String user) {
+        String query = "UPDATE Participant SET certifMed=? WHERE mail=?";
+        try {
+            Connection connection = DataSourceProvider.getDataSource().getConnection();
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1,value);
+            stmt.setString(2,user);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateCertifSco(int value, String user) {
+        String query = "UPDATE participants SET certifSco=? WHERE mail=?";
+        try {
+            Connection connection = DataSourceProvider.getDataSource().getConnection();
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1,value);
+            stmt.setString(2,user);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

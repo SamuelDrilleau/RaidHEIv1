@@ -73,3 +73,6 @@ function showDivs(n) {
     x[slideIndex-1].style.display = "block";
 }
 
+function changer(id){
+    document.getElementById(id).value = id;
+}

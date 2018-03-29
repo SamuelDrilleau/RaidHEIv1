@@ -15,4 +15,10 @@ public interface ParticipantDao {
     public Participant participantByMail(String mail);
 
     public void delParticipant(String mail);
+
+    public void updateAttestation(int value, String user);
+
+    public void updateCertifMed(int value, String User);
+
+    public void updateCertifSco(int value, String user);
 }
