@@ -108,9 +108,9 @@ public class ParticipantDaoImpl implements ParticipantDao {
                         rs.getString("tshirt"),
                         rs.getInt("fftri"),
                         rs.getString("nomEquipe"),
+                        rs.getInt("attestation"),
                         rs.getInt("certifMed"),
                         rs.getInt("certifSco"),
-                        rs.getInt("attestation"),
                         rs.getInt("caution"),
                         rs.getInt("paiement"));
             }
@@ -137,7 +137,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public void updateAttestation(int value, String user) {
-        String query = "UPDATE Participant SET attestation=? WHERE mail=?";
+        String query = "UPDATE participant SET attestation=? WHERE mail=?";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -152,7 +152,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public void updateCertifMed(int value, String user) {
-        String query = "UPDATE Participant SET certifMed=? WHERE mail=?";
+        String query = "UPDATE participant SET certifMed=? WHERE mail=?";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -166,7 +166,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public void updateCertifSco(int value, String user) {
-        String query = "UPDATE participants SET certifSco=? WHERE mail=?";
+        String query = "UPDATE participant SET certifSco=? WHERE mail=?";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement stmt = connection.prepareStatement(query);

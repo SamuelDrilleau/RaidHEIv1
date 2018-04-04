@@ -54,8 +54,8 @@ public class UserLibrary {
 
     public void updateAttestation(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
 
-    public void updateCertifMed(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
+    public void updateCertifMed(int valeur, String user){ParticipantDao.updateCertifMed(valeur,user);}
 
-    public void updatCertifSco(int valeur, String user){ParticipantDao.updateAttestation(valeur,user);}
+    public void updatCertifSco(int valeur, String user){ParticipantDao.updateCertifSco(valeur,user);}
 
 }

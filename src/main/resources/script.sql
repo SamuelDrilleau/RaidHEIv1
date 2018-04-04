@@ -27,9 +27,9 @@ CREATE TABLE Participant(
 	tshirt varchar(1) NOT NULL,
 	fftri tinyint(1) NOT NULL,
 	nomEquipe varchar(20) NOT NULL,
+	attestation tinyint(1) NOT NULL,
 	certifMed tinyint(1) NOT NULL,
 	certifSco tinyint(1) NOT NULL,
-	attestation tinyint(1) NOT NULL,
 	caution tinyint(1) NOT NULL,
   paiement tinyint(1) NOT NULL ,
 	FOREIGN KEY (nomEquipe) REFERENCES Equipe(nom));

@@ -24,37 +24,39 @@ import java.io.*;
 public class PersoServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");
-        String label1 = request.getParameter("attestation");
-        String label2 = request.getParameter("certifMed");
-        String label3 = request.getParameter("certifSco");
+            String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");
+            String label1 = request.getParameter("attestation");
+            String label2 = request.getParameter("certifMed");
+            String label3 = request.getParameter("certifSco");
 
-        String fichier = "";
+            System.out.println(label1+" "+label2+" "+label3);
 
-        if(label1.equals("attestation")){
-            fichier = "attestation";
-            UserLibrary.getInstance().updateAttestation(1,pseudoUtilisateurConnecte);
-        }else if (label2.equals("certifMed")){
-            fichier = "certifMed";
-            UserLibrary.getInstance().updateCertifMed(1,pseudoUtilisateurConnecte);
-        }else if(label3.equals("certifSco")){
-            fichier = "certifSco";
-            UserLibrary.getInstance().updatCertifSco(1,pseudoUtilisateurConnecte);
-        }
+            String fichier = "";
 
-        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ0","OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j0");
-        UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
+            if (label2==null && label3==null) {
+                fichier = "attestation";
+                UserLibrary.getInstance().updateAttestation(1, pseudoUtilisateurConnecte);
+            }else if (label1==null && label3==null) {
+                fichier = "certifMed";
+                UserLibrary.getInstance().updateCertifMed(1, pseudoUtilisateurConnecte);
+            }else if (label2==null && label1==null) {
+                fichier = "certifSco";
+                UserLibrary.getInstance().updatCertifSco(1, pseudoUtilisateurConnecte);
+            }
 
-        Part filePart = request.getPart(fichier); // Retrieves <input type="file" name="file">
-        InputStream fileContent = filePart.getInputStream();
+            AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j");
+            UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
 
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("application/pdf");
-        metadata.setContentLength(fileContent.available());
+            Part filePart = request.getPart(fichier); // Retrieves <input type="file" name="file">
+            InputStream fileContent = filePart.getInputStream();
 
-        S3client.uploadfile(Credentials,"docUser/"+pseudoUtilisateurConnecte+"/"+fichier, fileContent, metadata);
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType("application/pdf");
+            metadata.setContentLength(fileContent.available());
 
-        response.sendRedirect("/prive/perso");
+            S3client.uploadfile(Credentials, "docUser/" + pseudoUtilisateurConnecte + "/" + fichier, fileContent, metadata);
+
+            response.sendRedirect("/prive/perso");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
