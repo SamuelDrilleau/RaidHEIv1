@@ -3,7 +3,31 @@ USE raidhei;
 
 CREATE TABLE Raid(
   id int NOT NULL,
-  annee int NOT NULL);
+  debut DATE,
+  fin DATE,
+  contactMail varchar (50),
+  contactTel varchar (20),
+  lieu text,
+  presentation text,
+  prixCaution int,
+  prixEtudiantE int,
+  prixEtudiantL int,
+  prixExterneE int,
+  prixExterneL int,
+  nomCom1 varchar (30),
+  mailCom1 varchar (50),
+  nomCom2 varchar (30),
+  mailCom2 varchar (50),
+  epreuveV1 varchar (50),
+  epreuveV2 varchar (50),
+  epreuveS1 varchar (50),
+  epreuveS2 varchar (50),
+  epreuveS3 varchar (50),
+  epreuveD1 varchar (50),
+  epreuveD2 varchar (50),
+  equipeImg varchar (50),
+  plaquetteImg varchar (50),
+  ancienImg varchar (50));
 
 CREATE TABLE Equipe(
 	nom varchar(20) NOT NULL PRIMARY KEY,
