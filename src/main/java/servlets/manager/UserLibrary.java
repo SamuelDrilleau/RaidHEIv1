@@ -44,8 +44,6 @@ public class UserLibrary {
 
     public void addRaid(Raid raid){RaidDao.addRaid(raid);}
 
-    public void delRaid(){RaidDao.delRaid();}
-
     public Raid getRaid(){return RaidDao.getRaid(0);}
 
     public void addPhoto(Photo photo){PhotoDao.addPhoto(photo);}
@@ -57,5 +55,7 @@ public class UserLibrary {
     public void updateCertifMed(int valeur, String user){ParticipantDao.updateCertifMed(valeur,user);}
 
     public void updatCertifSco(int valeur, String user){ParticipantDao.updateCertifSco(valeur,user);}
+
+    public  void emptyRaid(){RaidDao.emptyRaid();}
 
 }

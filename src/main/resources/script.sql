@@ -5,6 +5,7 @@ CREATE TABLE Raid(
   id int NOT NULL,
   debut DATE,
   fin DATE,
+  changement DATE,
   contactMail varchar (50),
   contactTel varchar (20),
   lieu text,
