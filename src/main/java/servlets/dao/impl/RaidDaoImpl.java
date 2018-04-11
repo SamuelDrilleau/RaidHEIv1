@@ -13,9 +13,9 @@ public class RaidDaoImpl implements RaidDao{
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setDate(1,raid.getDebut());
-            stmt.setDate(2,raid.getFin());
-            stmt.setDate(3,raid.getChangement());
+            stmt.setDate(1,java.sql.Date.valueOf(raid.getDebut()));
+            stmt.setDate(2,java.sql.Date.valueOf(raid.getFin()));
+            stmt.setDate(3,java.sql.Date.valueOf(raid.getChangement()));
             stmt.setString(4,raid.getContactMail());
             stmt.setString(5,raid.getContactTel());
             stmt.setString(6,raid.getLieu());
@@ -58,9 +58,9 @@ public class RaidDaoImpl implements RaidDao{
             if (rs.next()) {
                 Raid raid = new Raid(
                         rs.getInt("id"),
-                        rs.getDate("debut"),
-                        rs.getDate("fin"),
-                        rs.getDate("changement"),
+                        rs.getDate("debut").toLocalDate(),
+                        rs.getDate("fin").toLocalDate(),
+                        rs.getDate("changement").toLocalDate(),
                         rs.getString("contactMail"),
                         rs.getString("contactTel"),
                         rs.getString("lieu"),

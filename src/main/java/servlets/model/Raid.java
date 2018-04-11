@@ -2,13 +2,14 @@ package servlets.model;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Raid {
 
     private int id=0;
-    private Date debut;
-    private Date fin;
-    private Date changement;
+    private LocalDate debut;
+    private LocalDate fin;
+    private LocalDate changement;
     private String contactMail;
     private String contactTel;
     private String lieu;
@@ -33,11 +34,11 @@ public class Raid {
     private String equipeImg;
     private String ancienImg;
 
-    public Raid(int id, Date debut, Date fin, Date changement, String contactMail, String contactTel, String lieu, String présentation, int prixCaution, int prixEtudiantE, int prixEtudiantL, int prixExterneE, int prixExterneL, String nomCom1, String mailCom1, String nomCom2, String mailCom2, String epreuveV1, String epreuveV2, String epreuveS1, String epreuveS2, String epreuveS3, String epreuveD1, String epreuveD2, String plaquetteImg, String equipeImg, String ancienImg) {
+    public Raid(int id, LocalDate debut, LocalDate changement, LocalDate fin, String contactMail, String contactTel, String lieu, String présentation, int prixCaution, int prixEtudiantE, int prixEtudiantL, int prixExterneE, int prixExterneL, String nomCom1, String mailCom1, String nomCom2, String mailCom2, String epreuveV1, String epreuveV2, String epreuveS1, String epreuveS2, String epreuveS3, String epreuveD1, String epreuveD2, String plaquetteImg, String equipeImg, String ancienImg) {
         this.id = id;
         this.debut = debut;
-        this.fin = fin;
         this.changement = changement;
+        this.fin = fin;
         this.contactMail = contactMail;
         this.contactTel = contactTel;
         this.lieu = lieu;
@@ -71,27 +72,27 @@ public class Raid {
         this.id = id;
     }
 
-    public Date getDebut() {
+    public LocalDate getDebut() {
         return debut;
     }
 
-    public void setDebut(Date debut) {
+    public void setDebut(LocalDate debut) {
         this.debut = debut;
     }
 
-    public Date getFin() {
+    public LocalDate getFin() {
         return fin;
     }
 
-    public void setFin(Date fin) {
+    public void setFin(LocalDate fin) {
         this.fin = fin;
     }
 
-    public Date getChangement() {
+    public LocalDate getChangement() {
         return changement;
     }
 
-    public void setChangement(Date changement) {
+    public void setChangement(LocalDate changement) {
         this.changement = changement;
     }
 
