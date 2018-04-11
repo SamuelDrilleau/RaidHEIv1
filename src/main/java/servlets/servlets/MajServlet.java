@@ -84,7 +84,7 @@ public class MajServlet extends HttpServlet {
             fichier = "ancien";
         }
 
-        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j");
+        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ0", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j0");
         UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
 
         Part filePart = request.getPart(fichier); // Retrieves <input type="file" name="file">
