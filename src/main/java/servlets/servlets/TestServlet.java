@@ -1,5 +1,9 @@
 package servlets.servlets;
 
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/loaderio-ca800b218dadb36e5b013aeabc48fa68")
+@WebServlet("/loaderio-ca800b218dadb36e5b013aeabc48fa68/")
 public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         PrintWriter out = response.getWriter();
 
         out.println("loaderio-ca800b218dadb36e5b013aeabc48fa68");
