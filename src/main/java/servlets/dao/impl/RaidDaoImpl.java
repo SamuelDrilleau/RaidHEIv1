@@ -19,7 +19,7 @@ public class RaidDaoImpl implements RaidDao{
             stmt.setString(4,raid.getContactMail());
             stmt.setString(5,raid.getContactTel());
             stmt.setString(6,raid.getLieu());
-            stmt.setString(7,raid.getPrésentation());
+            stmt.setString(7,raid.getPresentation());
             stmt.setInt(8,raid.getPrixCaution());
             stmt.setInt(9,raid.getPrixEtudiantE());
             stmt.setInt(10,raid.getPrixEtudiantL());

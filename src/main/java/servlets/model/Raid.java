@@ -13,7 +13,7 @@ public class Raid {
     private String contactMail;
     private String contactTel;
     private String lieu;
-    private String présentation;
+    private String presentation;
     private int prixCaution;
     private int prixEtudiantE;
     private int prixEtudiantL;
@@ -34,7 +34,7 @@ public class Raid {
     private String equipeImg;
     private String ancienImg;
 
-    public Raid(int id, LocalDate debut, LocalDate changement, LocalDate fin, String contactMail, String contactTel, String lieu, String présentation, int prixCaution, int prixEtudiantE, int prixEtudiantL, int prixExterneE, int prixExterneL, String nomCom1, String mailCom1, String nomCom2, String mailCom2, String epreuveV1, String epreuveV2, String epreuveS1, String epreuveS2, String epreuveS3, String epreuveD1, String epreuveD2, String plaquetteImg, String equipeImg, String ancienImg) {
+    public Raid(int id, LocalDate debut, LocalDate changement, LocalDate fin, String contactMail, String contactTel, String lieu, String presentation, int prixCaution, int prixEtudiantE, int prixEtudiantL, int prixExterneE, int prixExterneL, String nomCom1, String mailCom1, String nomCom2, String mailCom2, String epreuveV1, String epreuveV2, String epreuveS1, String epreuveS2, String epreuveS3, String epreuveD1, String epreuveD2, String plaquetteImg, String equipeImg, String ancienImg) {
         this.id = id;
         this.debut = debut;
         this.changement = changement;
@@ -42,7 +42,7 @@ public class Raid {
         this.contactMail = contactMail;
         this.contactTel = contactTel;
         this.lieu = lieu;
-        this.présentation = présentation;
+        this.presentation = presentation;
         this.prixCaution = prixCaution;
         this.prixEtudiantE = prixEtudiantE;
         this.prixEtudiantL = prixEtudiantL;
@@ -120,12 +120,12 @@ public class Raid {
         this.lieu = lieu;
     }
 
-    public String getPrésentation() {
-        return présentation;
+    public String getPresentation() {
+        return presentation;
     }
 
-    public void setPrésentation(String présentation) {
-        this.présentation = présentation;
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
     }
 
     public int getPrixCaution() {
