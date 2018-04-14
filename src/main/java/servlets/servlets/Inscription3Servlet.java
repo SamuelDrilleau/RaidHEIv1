@@ -33,7 +33,6 @@ public class Inscription3Servlet extends HttpServlet {
         String mail;
         String mdp1;
         String mdp2;
-        String mdp;
         String nom;
         String prenom;
         String sexe;
@@ -65,18 +64,27 @@ public class Inscription3Servlet extends HttpServlet {
         tshirt=request.getParameter("tshirt");
         fftri=Integer.parseInt(request.getParameter("fftri"));
 
+
         Participant participant = new Participant(mail, mdp1, nom, prenom, sexe, tel, statut, nomEnt, nomUrg, telUrg, bds, vtt, bus, tshirt, fftri, "Indiv",0,0,0,0,0);
 
         UserLibrary.getInstance().addParticipant(participant);
 
         response.sendRedirect("index");
 
+/* Si les mots de passes sont les mêmes, ont est redirigé vers l'index, sinon un message s'affiche pour nous indiquez que les mots de passes renseignés ne correspondent pas*/
+        if(mdp1.equals(mdp2)){
+            request.getSession().setAttribute("mdp",mdp2);
+            response.sendRedirect("index");
+        } else{
+            response.sendRedirect("Les mots de passes ne correspondent pas !");
+        }
+
         try {
             String host = "smtp.office365.com";
-            String user = "raidhei";
-            String pass = "2014Opale";
+            String user = "";
+            String pass = "";
             String to = mail;
-            String from = "raid@hei.fr";
+            String from = "";
             String subject = "Inscription RaidHEI";
             String messageText = "Your Is Test Email :";
             boolean sessionDebug = false;
@@ -89,7 +97,7 @@ public class Inscription3Servlet extends HttpServlet {
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.required", "true");
 
-            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+
             Session mailSession = Session.getDefaultInstance(props, null);
             mailSession.setDebug(sessionDebug);
             Message msg = new MimeMessage(mailSession);
@@ -127,8 +135,77 @@ public class Inscription3Servlet extends HttpServlet {
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/inscriptions.css\">\n" +
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
-                "<body>\n" +
-                "\n" +
+                "<body>\n");
+
+                out.println("<script type=\"text/javascript\" language=\"javascript\">");
+
+        out.println("       function validation(pass) {");
+        out.println("       if (pass.mdp1.value == '' || pass.mdp2.value == '') {");
+        out.println("           alert('Tous les champs ne sont pas remplis');");
+        out.println("           pass.mdp1.focus();");
+        out.println("           return false;");
+        out.println("       }");
+        out.println("       else if (pass.mdp1.value != pass.mdp2.value) {");
+        out.println("           alert('Ce ne sont pas les mêmes mots de passe!');");
+        out.println("           pass.mdp1.focus();");
+        out.println("           return false;");
+        out.println("       }");
+        out.println("       else if (pass.mdp1.value == pass.mdp2.value) {");
+        out.println("           return true;");
+        out.println("       }");
+        out.println("       else {");
+        out.println("           pass.mdp1.focus();");
+        out.println("           return false;");
+        out.println("       }");
+        out.println(" }");
+
+
+        /*Fonction qui vérifie que le caractère inscrit est alphabétique
+            @param evenement est l'événement fournis par le keypress
+            @param type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 1 pour bloquer lettres
+            @return true si le caractère est correct
+         */
+        out.println("                function verifieChar(evenement,type){");
+        out.println("            var charCode;");
+        out.println("            charCode = evenement.keyCode; //Code ascii");
+        out.println("");
+        out.println("            switch(type){");
+
+
+        out.println("                case 0:");
+
+        //Lettres en majuscules,minuscule et trait d'union, c'est idéal lorsqu'on veut remplir un nom, un prénom ..
+        out.println("                    if((charCode >= 65 && charCode <= 90)");
+        out.println("                            ||(charCode >= 97 && charCode <= 122)");
+        out.println("                            ||(charCode == 45)");
+        out.println("                            ||(charCode == 32)){");
+        out.println("");
+        out.println("                        return true ;");
+        out.println("                    }");
+        out.println("                    //si c'est un chiffre ou autre on n'affiche rien");
+        out.println("                    else{");
+        out.println("                        return false ;");
+        out.println("                    }");
+        out.println("                    break;");
+
+
+        out.println("  case 3:");
+
+        // Chiffres seulement, c'est idéal pour les numéros de téléphone, les âges, les codes postaux
+
+        out.println("         if(charCode >=48 && charCode <= 57) { ");
+        out.println("          return true;");
+        out.println("           }else {");
+        out.println("        return false;");
+        out.println("          }");
+        out.println("         break;");
+        out.println("            }//fermeture du switch");
+        out.println("        }//fermeture de la fonction");
+
+        out.println("</script>"+
+
+
+        "\n" +
                         "<!-- Navbar -->\n" +
                         "<nav class=\"w3-top\">\n" +
                         "  <div class=\"w3-bar w3-black w3-card\">\n" +
@@ -176,25 +253,25 @@ public class Inscription3Servlet extends HttpServlet {
                 "\n" +
                 "  <form method=\"post\" onSubmit=\"return validation(this)\">\n" +
                 "    <label >E-mail</label>\n" +
-                "    <input type=\"email\" name=\"email\" required=\"\">\n" +
-                "    <label>Mot de passe</label><input type=\"password\" name=\"mdp1\" required=\"\">\n" +
-                "    <label>Confirmer le mot de passe</label><input type=\"password\" name=\"mdp2\" required=\"\">\n" +
-                "    <label>Nom</label><input type=\"text\" name=\"nom\" required=\"\">\n" +
-                "    <label>Prénom</label><input type=\"text\" name=\"prenom\" required=\"\">\n" +
+                "    <input type=\"email\" name=\"email\" required pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\">\n" +
+                "    <label>Mot de passe</label><input type=\"password\" name=\"mdp1\" required >\n" +
+                "    <label>Confirmer le mot de passe</label><input type=\"password\" name=\"mdp2\" required >\n" +
+                "    <label>Nom</label><input type=\"text\" name=\"nom\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Prénom</label><input type=\"text\" name=\"prenom\" onKeyPress=\"return verifieChar(event,0);\" required \n" +
                 "    <label>Sexe</label>\n" +
                 "    <select name=\"sexe\">\n" +
                 "      <option value=\"F\">Féminin</option>\n" +
                 "      <option value=\"M\">Masculin</option>\n" +
                 "    </select>\n" +
-                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required=\"\">\n" +
+                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,3);\" >\n" +
                 "    <label>Statut</label>\n" +
                 "    <select name=\"statut\">\n" +
                 "      <option value=\"etudiant\">Etudiant</option>\n" +
                 "      <option value=\"salarie\">Salarié</option>\n" +
                 "    </select>\n" +
-                "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required=\"\">\n" +
-                "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required=\"\">\n" +
-                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required=\"\">\n" +
+                "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,3);\">\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
                 "      <option value=\"1\">Oui</option>\n" +
