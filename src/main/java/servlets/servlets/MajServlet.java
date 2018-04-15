@@ -3,6 +3,8 @@ package servlets.servlets;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import servlets.manager.UserLibrary;
+import servlets.model.Raid;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,12 +16,14 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/admin/maj")
 @MultipartConfig
 public class MajServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
+
         UserLibrary.getInstance().emptyRaid();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -65,7 +69,6 @@ public class MajServlet extends HttpServlet {
             UserLibrary.getInstance().addRaid(raid);
 
         }
-        */
 
         String label1 = request.getParameter("equipe");
         String label2 = request.getParameter("plaquette");
@@ -73,7 +76,7 @@ public class MajServlet extends HttpServlet {
 
         System.out.println(label1+" "+label2+" "+label3);
 
-
+        /*
         String fichier = "";
 
         if (label2==null && label3==null) {
@@ -95,6 +98,7 @@ public class MajServlet extends HttpServlet {
         metadata.setContentLength(fileContent.available());
 
         S3client.uploadfile(Credentials, "majRaid/" + fichier, fileContent, metadata);
+        */
 
         response.sendRedirect("/admin/admin");
     }
@@ -113,14 +117,63 @@ public class MajServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "    <link rel=\"stylesheet\" href=\"css/genreal.css\">\n" +
+                "<style>\n" +
+                "/* Style inputs with type=\"text\", select elements and textareas */\n" +
+                "input[type=text], select, textarea, input[type=\"tel\"], input[type=\"password\"], input[type=\"email\"] {\n" +
+                "    width: 100%; /* Full width */\n" +
+                "    padding: 12px; /* Some padding */ \n" +
+                "    border: 1px solid #ccc; /* Gray border */\n" +
+                "    border-radius: 4px; /* Rounded borders */\n" +
+                "    box-sizing: border-box; /* Make sure that padding and width stays in place */\n" +
+                "    margin-top: 6px; /* Add a top margin */\n" +
+                "    margin-bottom: 16px; /* Bottom margin */\n" +
+                "    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the submit button with a specific background color etc */\n" +
+                "input[type=submit] {\n" +
+                "    background-color: #4CAF50;\n" +
+                "    color: white;\n" +
+                "    padding: 12px 20px;\n" +
+                "    border: none;\n" +
+                "    border-radius: 4px;\n" +
+                "    cursor: pointer;\n" +
+                "}\n" +
+                "\n" +
+                "/* When moving the mouse over the submit button, add a darker green color */\n" +
+                "input[type=submit]:hover {\n" +
+                "    background-color: #45a049;\n" +
+                "}\n" +
+                "\n" +
+                "/* Add a background color and some padding around the form */\n" +
+                ".container {\n" +
+                "    border-radius: 5px;\n" +
+                "    background-color: #f2f2f2;\n" +
+                "    padding: 20px;\n" +
+                "    width: 35%;\n" +
+                "    margin-top: 10%;\n" +
+                "    margin-bottom: 10%;\n" +
+                "    margin-right: auto;\n" +
+                "    margin-left: auto;\n" +
+                "}\n" +
+                "\n" +
+                "footer{\n" +
+                "    background-color: #fff;\n" +
+                "    width:100%;\n" +
+                "    z-index:1\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n"+
+                "</style>"+
+                "    <link rel=\"stylesheet\" href=\"../css/genreal.css\">\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "    <nav class=\"w3-top\">\n" +
+                "<nav class=\"w3-top\">\n" +
                 "  <div class=\"w3-bar w3-black w3-card\">\n" +
                 "    <a class=\"w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right\" href=\"javascript:void(0)\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>\n" +
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                "      <a href=\"index\"><button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button></a>\n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button>     \n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
                 "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
                 "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
@@ -131,7 +184,7 @@ public class MajServlet extends HttpServlet {
                 "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
                 "    <a href=\"engagements\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">ENGAGEMENTS</a>\n" +
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                "      <button class=\"w3-padding-large w3-button\" title=\"More\">INFORMATIONS</button>\n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">INFORMATIONS</button>     \n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
                 "        <a href=\"infos\" class=\"w3-bar-item w3-button\">INFOS PRATIQUES</a>\n" +
                 "        <a href=\"materiel\" class=\"w3-bar-item w3-button\">MATERIEL</a>\n" +
@@ -145,8 +198,8 @@ public class MajServlet extends HttpServlet {
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
                 "      </div>\n" +
-                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
-                "  </div>\n" +
+                "       </div>"+
+                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
                 "  </div>\n" +
                 "</nav>\n" +
                 "\n" +
@@ -161,7 +214,7 @@ public class MajServlet extends HttpServlet {
                 "<div class=\"w3-content\" style=\"max-width:2000px;margin-top:46px\">\n" +
                 "\n" +
                 "    <div class=\"container\">\n" +
-                "    <form method=\"post\">\n" +
+                "    <form method=\"post\" enctype='multipart/form-data'>\n" +
                 "                <label>Date début</label>\n" +
                 "                <input type=\"date\" name=\"debut\" required=>\n" +
                 "                <label>Date changement de prix</label>\n" +

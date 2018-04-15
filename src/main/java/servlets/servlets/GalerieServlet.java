@@ -28,7 +28,7 @@ public class GalerieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setCharacterEncoding("UTF-8");
-
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
 
@@ -42,7 +42,55 @@ public class GalerieServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/inscriptions.css\">\n" +
+                "<style>\n" +
+                "/* Style inputs with type=\"text\", select elements and textareas */\n" +
+                "input[type=text], select, textarea, input[type=\"tel\"], input[type=\"password\"], input[type=\"email\"] {\n" +
+                "    width: 100%; /* Full width */\n" +
+                "    padding: 12px; /* Some padding */ \n" +
+                "    border: 1px solid #ccc; /* Gray border */\n" +
+                "    border-radius: 4px; /* Rounded borders */\n" +
+                "    box-sizing: border-box; /* Make sure that padding and width stays in place */\n" +
+                "    margin-top: 6px; /* Add a top margin */\n" +
+                "    margin-bottom: 16px; /* Bottom margin */\n" +
+                "    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the submit button with a specific background color etc */\n" +
+                "input[type=submit] {\n" +
+                "    background-color: #4CAF50;\n" +
+                "    color: white;\n" +
+                "    padding: 12px 20px;\n" +
+                "    border: none;\n" +
+                "    border-radius: 4px;\n" +
+                "    cursor: pointer;\n" +
+                "}\n" +
+                "\n" +
+                "/* When moving the mouse over the submit button, add a darker green color */\n" +
+                "input[type=submit]:hover {\n" +
+                "    background-color: #45a049;\n" +
+                "}\n" +
+                "\n" +
+                "/* Add a background color and some padding around the form */\n" +
+                ".container {\n" +
+                "    border-radius: 5px;\n" +
+                "    background-color: #f2f2f2;\n" +
+                "    padding: 20px;\n" +
+                "    width: 35%;\n" +
+                "    margin-top: 10%;\n" +
+                "    margin-bottom: 10%;\n" +
+                "    margin-right: auto;\n" +
+                "    margin-left: auto;\n" +
+                "}\n" +
+                "\n" +
+                "footer{\n" +
+                "    background-color: #fff;\n" +
+                "    width:100%;\n" +
+                "    z-index:1\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n"+
+                "</style>"+
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
                 "<body>\n" +
                 "\n" +
@@ -51,12 +99,12 @@ public class GalerieServlet extends HttpServlet {
                 "  <div class=\"w3-bar w3-black w3-card\">\n" +
                 "    <a class=\"w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right\" href=\"javascript:void(0)\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>\n" +
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                "      <a href=\"../index\" ><button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button></a>     \n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button>     \n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
                 "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
                 "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
                 "        <a href=\"precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
-                "        <a href=\"epreuve\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
+                "        <a href=\"epreuves\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
                 "      </div>\n" +
                 "    </div>\n" +
                 "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
@@ -76,9 +124,10 @@ public class GalerieServlet extends HttpServlet {
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
                 "      </div>\n" +
-                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
+                "       </div>"+
+                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
                 "  </div>\n" +
-                "</nav>"+
+                "</nav>\n" +
 
                 "<!-- Page content -->\n" +
                 "<div class=\"container\">\n"+

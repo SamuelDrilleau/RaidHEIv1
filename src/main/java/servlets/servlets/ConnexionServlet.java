@@ -20,15 +20,13 @@ import static java.lang.System.out;
 
 
 @WebServlet("/connexion")
-
 /* Page de connexion au raid */
-
 public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mailFormulaire = request.getParameter("email");
         String mdpFormulaire = DigestUtils.sha256Hex(request.getParameter("mdp"));
         Participant participant = UserLibrary.getInstance().participantByMail(mailFormulaire);
-// connexion
+
         if (participant != null) {
             if (mdpFormulaire.equals(participant.getMdp()) && mailFormulaire.equals(participant.getMail())) {
                 request.getSession().setAttribute("utilisateurConnecte", mailFormulaire);
@@ -72,7 +70,7 @@ public class ConnexionServlet extends HttpServlet {
                 "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
                 "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
                 "        <a href=\"precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
-                "        <a href=\"epreuve\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
+                "        <a href=\"epreuves\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
                 "      </div>\n" +
                 "    </div>\n" +
                 "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
@@ -92,9 +90,10 @@ public class ConnexionServlet extends HttpServlet {
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
                 "      </div>\n" +
-                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
+                "       </div>"+
+                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
                 "  </div>\n" +
-                "</nav>");
+                "</nav>\n");
 
         String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");
         if(pseudoUtilisateurConnecte == null || "".equals(pseudoUtilisateurConnecte)) {
@@ -110,7 +109,7 @@ public class ConnexionServlet extends HttpServlet {
                     "    <input type=\"submit\" name=\"button\">\n" +
                     "  </form>\n" +
                     "  \n" +
-                    "</div>>");
+                    "</div>");
             out.println("pas connecte");
 
         }else if(pseudoUtilisateurConnecte.equals("raid@hei.fr")){
@@ -123,7 +122,7 @@ public class ConnexionServlet extends HttpServlet {
         }
 
         out.println("<!-- Footer -->\n" +
-                "<footer class=\"w3-container w3-padding-32 w3-center w3-opacity w3-xlarge\">\n" +
+                "<footer class=\"w3-container w3-padding-32 w3-center w3-opacity w3-xlarge\" style=\"position: absolute; bottom: 0;\">\n" +
                 "  <i class=\"fa fa-facebook-official fa-2x w3-hover-opacity\"></i>\n" +
                 "  <i class=\"fa fa-instagram fa-2x w3-hover-opacity\"></i>\n" +
                 "  <i class=\"fa fa-snapchat fa-2x w3-hover-opacity\"></i>\n" +

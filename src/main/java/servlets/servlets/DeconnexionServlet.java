@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/deconnexion")
+/*Page de déconnexion*/
 public class DeconnexionServlet extends HttpServlet {
 
     @Override

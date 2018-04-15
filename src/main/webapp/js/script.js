@@ -18,6 +18,7 @@ function validation(f) {
     }
 }
 
+/* Fonction qui permet d'envoyer le formulaire si certaines conditions sont respectées, en l'occurence ici si les champs de mots de passe sont vides ou qu'ils ne correspondent pas l'un à l'autre */
 function validation2(f) {
     if (f.mdpE1.value == '' || f.mdpE2.value == '') {
         alert('Tous les champs ne sont pas remplis');

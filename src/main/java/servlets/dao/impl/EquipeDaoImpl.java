@@ -30,8 +30,8 @@ public class EquipeDaoImpl implements EquipeDao {
     }
 
     @Override
-        /* Cette fonction permet d'ajouter une équipe à la base de données */
-    public Equipe addEquipe(Equipe equipe) {
+    /* Cette fonction permet d'ajouter une équipe à la base de données */
+    public void addEquipe(Equipe equipe) {
         String query ="INSERT INTO Equipe(nom,mdp,typeRaid) VALUES(?,?,?)";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -44,6 +44,5 @@ public class EquipeDaoImpl implements EquipeDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return equipe;
     }
 }

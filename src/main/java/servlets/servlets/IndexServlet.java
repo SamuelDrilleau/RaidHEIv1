@@ -7,6 +7,7 @@ import servlets.manager.UserLibrary;
 import servlets.model.Participant;
 import servlets.model.Raid;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +17,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContextEvent;
+
+
 @WebServlet("/index")
-
 /* Page d'index du site web */
-
 public class IndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 
@@ -29,6 +32,8 @@ public class IndexServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         PrintWriter out = response.getWriter();
+
+        Raid raid = UserLibrary.getInstance().getRaid();
 
         out.println("<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -39,6 +44,55 @@ public class IndexServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
+                "<style>\n" +
+                "/* Style inputs with type=\"text\", select elements and textareas */\n" +
+                "input[type=text], select, textarea, input[type=\"tel\"], input[type=\"password\"], input[type=\"email\"] {\n" +
+                "    width: 100%; /* Full width */\n" +
+                "    padding: 12px; /* Some padding */ \n" +
+                "    border: 1px solid #ccc; /* Gray border */\n" +
+                "    border-radius: 4px; /* Rounded borders */\n" +
+                "    box-sizing: border-box; /* Make sure that padding and width stays in place */\n" +
+                "    margin-top: 6px; /* Add a top margin */\n" +
+                "    margin-bottom: 16px; /* Bottom margin */\n" +
+                "    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the submit button with a specific background color etc */\n" +
+                "input[type=submit] {\n" +
+                "    background-color: #4CAF50;\n" +
+                "    color: white;\n" +
+                "    padding: 12px 20px;\n" +
+                "    border: none;\n" +
+                "    border-radius: 4px;\n" +
+                "    cursor: pointer;\n" +
+                "}\n" +
+                "\n" +
+                "/* When moving the mouse over the submit button, add a darker green color */\n" +
+                "input[type=submit]:hover {\n" +
+                "    background-color: #45a049;\n" +
+                "}\n" +
+                "\n" +
+                "/* Add a background color and some padding around the form */\n" +
+                ".container {\n" +
+                "    border-radius: 5px;\n" +
+                "    background-color: #f2f2f2;\n" +
+                "    padding: 20px;\n" +
+                "    width: 35%;\n" +
+                "    margin-top: 10%;\n" +
+                "    margin-bottom: 10%;\n" +
+                "    margin-right: auto;\n" +
+                "    margin-left: auto;\n" +
+                "}\n" +
+                "\n" +
+                "footer{\n" +
+                "    background-color: #fff;\n" +
+                "    width:100%;\n" +
+                "    z-index:1\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n"+
+                "</style>"+
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
                 "<body>\n" +
                 "\n" +
@@ -72,7 +126,8 @@ public class IndexServlet extends HttpServlet {
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
                 "      </div>\n" +
-                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
+                "       </div>"+
+                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
                 "  </div>\n" +
                 "</nav>\n" +
                 "\n" +
@@ -137,17 +192,17 @@ public class IndexServlet extends HttpServlet {
                 "      <h2 class=\"w3-wide w3-center\">CONTACT</h2>\n" +
                 "      <div class=\"w3-row-padding w3-padding-32\" style=\"margin:0 -16px\">\n" +
                 "        <div class=\"w3-third w3-margin-bottom\">\n" +
-                "          <i class=\"fa fa-map-marker fa-2x\" style=\"width:30px\"></i> Chicago, US\n" +
+                "          <i class=\"fa fa-map-marker fa-2x\" style=\"width:30px\"></i>13 rue de Toul 59000 Lille\n" +
                 "        </div>\n" +
                 "        <div class=\"w3-third w3-margin-bottom\">\n" +
-                "          <i class=\"fa fa-phone fa-2x\" style=\"width:30px\"></i> Phone: +00 151515\n" +
+                "          <i class=\"fa fa-phone fa-2x\" style=\"width:30px\"></i>"); out.println(raid.getContactTel()); out.print("\n" +
                 "        </div>\n" +
                 "        <div class=\"w3-third w3-margin-bottom\">\n" +
-                "          <i class=\"fa fa-envelope fa-2x\" style=\"width:30px\"> </i> Email: mail@mail.com\n" +
+                "          <i class=\"fa fa-envelope fa-2x\" style=\"width:30px\"> </i>"); out.println(raid.getContactMail()); out.print("\n" +
                 "        </div>\n" +
                 "      </div>\n" +
                 "    </div>\n" +
-                "  </div>\n" +
+                "  \n" +
                 "  \n" +
                 "<!-- End Page Content -->\n" +
                 "</div>\n" +

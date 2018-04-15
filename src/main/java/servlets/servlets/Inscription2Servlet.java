@@ -8,8 +8,9 @@ import servlets.manager.UserLibrary;
 import servlets.model.Equipe;
 import servlets.model.Participant;
 
-import javax.mail.*;
-import javax.mail.internet.AddressException;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
@@ -19,22 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-@WebServlet("/inscription3")
-
-/* Page permettant de s'inscrire au site en individuel */
-public class Inscription3Servlet extends HttpServlet {
-
+@WebServlet("/inscription2")
+/* Page permettant de s'inscrire au site*/
+public class Inscription2Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mail;
         String mdp1;
         String mdp2;
+        String mdp;
         String nom;
         String prenom;
         String sexe;
@@ -49,44 +46,47 @@ public class Inscription3Servlet extends HttpServlet {
         String tshirt;
         int fftri;
 
-        mail = request.getParameter("email");
+
+        String nomEquipe1;
+        String mdpE1;
+        String mdpE2;
+        String typeRaid;
+
+        mail= request.getParameter("email");
         mdp1 = DigestUtils.sha256Hex(request.getParameter("mdp1"));
         mdp2 = DigestUtils.sha256Hex(request.getParameter("mdp2"));
-        nom = request.getParameter("nom");
-        prenom = request.getParameter("prenom");
-        sexe = request.getParameter("sexe");
-        tel = request.getParameter("tel");
-        statut = request.getParameter("statut");
-        nomEnt = request.getParameter("ent/ecole");
-        nomUrg = request.getParameter("nomUrg");
-        telUrg = request.getParameter("telUrg");
+        nom= request.getParameter("nom");
+        prenom= request.getParameter("prenom");
+        sexe= request.getParameter("sexe");
+        tel=request.getParameter("tel");
+        statut=request.getParameter("statut");
+        nomEnt=request.getParameter("ent/ecole");
+        nomUrg=request.getParameter("nomUrg");
+        telUrg=request.getParameter("telUrg");
         bds=Integer.parseInt(request.getParameter("bds"));
         vtt=Integer.parseInt(request.getParameter("vtt"));
         bus=Integer.parseInt(request.getParameter("bus"));
         tshirt=request.getParameter("tshirt");
         fftri=Integer.parseInt(request.getParameter("fftri"));
 
+        nomEquipe1=request.getParameter("nomEquipe1");
+        mdpE1=DigestUtils.sha256Hex(request.getParameter("mdpE1"));
+        mdpE2=DigestUtils.sha256Hex(request.getParameter("mdpE2"));
+        typeRaid=request.getParameter("typeRaid");
 
-        Participant participant = new Participant(mail, mdp1, nom, prenom, sexe, tel, statut, nomEnt, nomUrg, telUrg, bds, vtt, bus, tshirt, fftri, "Indiv",0,0,0,0,0);
+        Participant participant = new Participant(mail,mdp1,nom,prenom,sexe,tel,statut,nomEnt,nomUrg,telUrg,bds,vtt,bus,tshirt,fftri,nomEquipe1,0,0,0,0,0);
 
         UserLibrary.getInstance().addParticipant(participant);
 
+        response.sendRedirect("index");
 
-/* Si les mots de passes sont les mêmes, ont est redirigé vers l'index, sinon un message s'affiche pour nous indiquez que les mots de passes renseignés ne correspondent pas*/
-        if(mdp1.equals(mdp2)){
-            request.getSession().setAttribute("mdp",mdp2);
-            response.sendRedirect("index");
-        } else{
-            response.sendRedirect("Les mots de passes ne correspondent pas !");
-        }
- /* Test de connexion */
         try {
             String host = "smtp.office365.com";
             String user = "";
             String pass = "";
             String to = mail;
             String from = "";
-            String subject = "Inscription RaidHEI";
+            String subject = "Inscription RaiHEI";
             String messageText = "Your Is Test Email :";
             boolean sessionDebug = false;
 
@@ -98,7 +98,7 @@ public class Inscription3Servlet extends HttpServlet {
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.required", "true");
 
-
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             Session mailSession = Session.getDefaultInstance(props, null);
             mailSession.setDebug(sessionDebug);
             Message msg = new MimeMessage(mailSession);
@@ -117,6 +117,7 @@ public class Inscription3Servlet extends HttpServlet {
         } catch (Exception ex) {
             System.out.println(ex);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,7 +126,7 @@ public class Inscription3Servlet extends HttpServlet {
         PrintWriter out=response.getWriter();
 
         out.println("<!DOCTYPE html>\n" +
-                "<html>\n" +
+                "<html xmlns:th=\"http://www.thymeleaf.org\">\n" +
                 "<title>Raid HEI - Le Raid</title>\n" +
                 "<meta charset=\"UTF-8\">\n" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
@@ -136,110 +137,42 @@ public class Inscription3Servlet extends HttpServlet {
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/inscriptions.css\">\n" +
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
-                "<body>\n");
-
-                out.println("<script type=\"text/javascript\" language=\"javascript\">");
-
-        out.println("       function validation(pass) {");
-        out.println("       if (pass.mdp1.value == '' || pass.mdp2.value == '') {");
-        out.println("           alert('Tous les champs ne sont pas remplis');");
-        out.println("           pass.mdp1.focus();");
-        out.println("           return false;");
-        out.println("       }");
-        out.println("       else if (pass.mdp1.value != pass.mdp2.value) {");
-        out.println("           alert('Ce ne sont pas les mêmes mots de passe!');");
-        out.println("           pass.mdp1.focus();");
-        out.println("           return false;");
-        out.println("       }");
-        out.println("       else if (pass.mdp1.value == pass.mdp2.value) {");
-        out.println("           return true;");
-        out.println("       }");
-        out.println("       else {");
-        out.println("           pass.mdp1.focus();");
-        out.println("           return false;");
-        out.println("       }");
-        out.println(" }");
-
-
-        /*Fonction qui vérifie que le caractère inscrit est alphabétique
-            @param evenement est l'événement fournis par le keypress
-            @param type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 1 pour bloquer lettres
-            @return true si le caractère est correct
-         */
-        out.println("                function verifieChar(evenement,type){");
-        out.println("            var charCode;");
-        out.println("            charCode = evenement.keyCode; //Code ascii");
-        out.println("");
-        out.println("            switch(type){");
-
-
-        out.println("                case 0:");
-
-        //Lettres en majuscules,minuscule et trait d'union, c'est idéal lorsqu'on veut remplir un nom, un prénom ..
-        out.println("                    if((charCode >= 65 && charCode <= 90)");
-        out.println("                            ||(charCode >= 97 && charCode <= 122)");
-        out.println("                            ||(charCode == 45)");
-        out.println("                            ||(charCode == 32)){");
-        out.println("");
-        out.println("                        return true ;");
-        out.println("                    }");
-        out.println("                    //si c'est un chiffre ou autre on n'affiche rien");
-        out.println("                    else{");
-        out.println("                        return false ;");
-        out.println("                    }");
-        out.println("                    break;");
-
-
-        out.println("  case 1:");
-
-        // Chiffres seulement, c'est idéal pour les numéros de téléphone, les âges, les codes postaux
-
-        out.println("         if(charCode >=48 && charCode <= 57) { ");
-        out.println("          return true;");
-        out.println("           }else {");
-        out.println("        return false;");
-        out.println("          }");
-        out.println("         break;");
-        out.println("            }//fermeture du switch");
-        out.println("        }//fermeture de la fonction");
-
-        out.println("</script>"+
-
-
-        "\n" +
-                        "<!-- Navbar -->\n" +
-                        "<nav class=\"w3-top\">\n" +
-                        "  <div class=\"w3-bar w3-black w3-card\">\n" +
-                        "    <a class=\"w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right\" href=\"javascript:void(0)\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>\n" +
-                        "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                        "      <button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button>     \n" +
-                        "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                        "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
-                        "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
-                        "        <a href=\"precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
-                        "        <a href=\"epreuve\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
-                        "      </div>\n" +
-                        "    </div>\n" +
-                        "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
-                        "    <a href=\"engagements\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">ENGAGEMENTS</a>\n" +
-                        "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                        "      <button class=\"w3-padding-large w3-button\" title=\"More\">INFORMATIONS</button>     \n" +
-                        "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                        "        <a href=\"infos\" class=\"w3-bar-item w3-button\">INFOS PRATIQUES</a>\n" +
-                        "        <a href=\"materiel\" class=\"w3-bar-item w3-button\">MATERIEL</a>\n" +
-                        "        <a href=\"galerie\" class=\"w3-bar-item w3-button\">GALERIE</a>\n" +
-                        "      </div>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
-                        "      <button class=\"w3-padding-large w3-button\" title=\"More\">INSCRIPTIONS</button>\n" +
-                        "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                        "        <a href=\"inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
-                        "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
-                        "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
-                        "      </div>\n" +
-                        "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
-                        "  </div>\n" +
-                        "</nav>"+
+                "<body>\n" +
+                "\n" +
+                "<!-- Navbar -->\n" +
+                "<nav class=\"w3-top\">\n" +
+                "  <div class=\"w3-bar w3-black w3-card\">\n" +
+                "    <a class=\"w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right\" href=\"javascript:void(0)\" onclick=\"myFunction()\" title=\"Toggle Navigation Menu\"><i class=\"fa fa-bars\"></i></a>\n" +
+                "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button>     \n" +
+                "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
+                "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
+                "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
+                "        <a href=\"precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
+                "        <a href=\"epreuves\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
+                "      </div>\n" +
+                "    </div>\n" +
+                "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
+                "    <a href=\"engagements\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">ENGAGEMENTS</a>\n" +
+                "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">INFORMATIONS</button>     \n" +
+                "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
+                "        <a href=\"infos\" class=\"w3-bar-item w3-button\">INFOS PRATIQUES</a>\n" +
+                "        <a href=\"materiel\" class=\"w3-bar-item w3-button\">MATERIEL</a>\n" +
+                "        <a href=\"galerie\" class=\"w3-bar-item w3-button\">GALERIE</a>\n" +
+                "      </div>\n" +
+                "    </div>\n" +
+                "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
+                "      <button class=\"w3-padding-large w3-button\" title=\"More\">INSCRIPTIONS</button>\n" +
+                "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
+                "        <a href=\"inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
+                "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
+                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
+                "      </div>\n" +
+                "       </div>"+
+                "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
+                "  </div>\n" +
+                "</nav>\n" +
                 "\n" +
                 "<!-- Navbar on small screens -->\n" +
                 "<nav id=\"navDemo\" class=\"w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top\" style=\"margin-top:46px\">\n" +
@@ -254,25 +187,25 @@ public class Inscription3Servlet extends HttpServlet {
                 "\n" +
                 "  <form method=\"post\" onSubmit=\"return validation(this)\">\n" +
                 "    <label >E-mail</label>\n" +
-                "    <input type=\"email\" name=\"email\" required pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\">\n" +
-                "    <label>Mot de passe</label><input type=\"password\" name=\"mdp1\" required >\n" +
-                "    <label>Confirmer le mot de passe</label><input type=\"password\" name=\"mdp2\" required >\n" +
-                "    <label>Nom</label><input type=\"text\" name=\"nom\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
-                "    <label>Prénom</label><input type=\"text\" name=\"prenom\" onKeyPress=\"return verifieChar(event,0);\" required \n" +
+                "    <input type=\"email\" name=\"email\" required=\"\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$\">\n" +
+                "    <label>Mot de passe</label><input type=\"password\" name=\"mdp1\" required=\"\">\n" +
+                "    <label>Confirmer le mot de passe</label><input type=\"password\" name=\"mdp2\" required=\"\">\n" +
+                "    <label>Nom</label><input type=\"text\" name=\"nom\" required=\"\" onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Prénom</label><input type=\"text\" name=\"prenom\" required=\"\" onKeyPress=\"return verifieChar(event,0);\">\n" +
                 "    <label>Sexe</label>\n" +
                 "    <select name=\"sexe\">\n" +
                 "      <option value=\"F\">Féminin</option>\n" +
                 "      <option value=\"M\">Masculin</option>\n" +
                 "    </select>\n" +
-                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,1);\" >\n" +
+                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required=\"\">\n" +
                 "    <label>Statut</label>\n" +
                 "    <select name=\"statut\">\n" +
                 "      <option value=\"etudiant\">Etudiant</option>\n" +
                 "      <option value=\"salarie\">Salarié</option>\n" +
                 "    </select>\n" +
-                "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
-                "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
-                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,1);\">\n" +
+                "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required=\"\" onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required=\"\" onKeyPress=\"return verifieChar(event,0);\">\n" +
+                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required=\"\" onKeyPress=\"return verifieChar(event,1);\">\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
                 "      <option value=\"1\">Oui</option>\n" +
@@ -302,7 +235,18 @@ public class Inscription3Servlet extends HttpServlet {
                 "    </select>\n" +
                 "\n" +
                 "      <label>Nom de l'équipe</label>\n" +
-                "      <input type=\"text\" name=\"nomEquipe1\" value=\"Indiv\" disabled=\"disabled\">"+
+                "      <select=\"nomEquipe1\">\n");
+                ArrayList<Equipe> list = UserLibrary.getInstance().getAllEquipe();
+                for(int i=0;i<list.size();i++){
+                    if (!list.get(i).getNom().equals("Indiv")){
+                        out.println("<option>");
+                        out.println(list.get(i).getNom());
+                        out.println("</option>");
+                    }
+                }
+                out.println("</select>");
+                out.println("<label>Mot de passe de l'équipe</label>\n" +
+                "      <input id=\"mdpE1\" type=\"password\" name=\"mdpE1\">\n" +
                 "<input type=\"submit\" value=\"Valider\" />"+
                 "  </form>\n" +
                 "  \n" +
@@ -316,8 +260,39 @@ public class Inscription3Servlet extends HttpServlet {
                 "  <i class=\"fa fa-pinterest-p fa-2x w3-hover-opacity\"></i>\n" +
                 "  <i class=\"fa fa-twitter fa-2x w3-hover-opacity\"></i>\n" +
                 "</footer>\n" +
-                "\n" +
-                "</body>\n" +
+                "\n");
+        out.println("<script type=\"text/javascript\" language=\"javascript\">");
+        out.println("       function validation(pass) {");
+        out.println("       if (pass.mdp1.value == '' || pass.mdp2.value == '') {");
+        out.println("           alert('Tous les champs ne sont pas remplis');");
+         /*Fonction qui vérifie que le caractère inscrit est alphabétique
+-         Evenement est l'événement fournis par le keypress
+-         Type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 3 pour bloquer lettres
+-        On retourne true si le caractère est correct
++            @param evenement est l'événement fournis par le keypress
++            @param type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 1 pour bloquer lettres
++            @return true si le caractère est correct
+          */
+        out.println("                function verifieChar(evenement,type){");
+        out.println("            var charCode;");
+        out.println("                    }");
+        out.println("                    break;");
+        out.println("  case 1:");
+        // Chiffres seulement, c'est idéal pour les numéros de téléphone, les ages, les codes postaux
+        // Chiffres seulement, c'est idéal pour les numéros de téléphone, les âges, les codes postaux
+        out.println("         if(charCode >=48 && charCode <= 57) { ");
+        out.println("          return true;");
+        out.println("           }else {");
+        out.println("        return false;");
+        out.println("          }");
+        out.println("         break;");
+        out.println("            }");
+        //fermeture du switch
+        out.println("        }");
+        //fermeture de la fonction
+        out.println("            }//fermeture du switch");
+        out.println("        }//fermeture de la fonction");
+        out.println("</script>"+"</body>\n" +
                 "</html>\n");
     }
 }
