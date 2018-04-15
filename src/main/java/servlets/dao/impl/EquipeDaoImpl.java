@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class EquipeDaoImpl implements EquipeDao {
     @Override
+    /* Cette fonction permet de récupérer les équipes de la base de données */
     public ArrayList<Equipe> getAllEquipe() {
         ArrayList<Equipe> listEquipe = new ArrayList<>();
         try {
@@ -29,7 +30,8 @@ public class EquipeDaoImpl implements EquipeDao {
     }
 
     @Override
-    public void addEquipe(Equipe equipe) {
+        /* Cette fonction permet d'ajouter une équipe à la base de données */
+    public Equipe addEquipe(Equipe equipe) {
         String query ="INSERT INTO Equipe(nom,mdp,typeRaid) VALUES(?,?,?)";
         try {
             Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -42,5 +44,6 @@ public class EquipeDaoImpl implements EquipeDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return equipe;
     }
 }
