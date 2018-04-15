@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.Properties;
 
 @WebServlet("/inscription3")
+
+/* Page permettant de s'inscrire au site en individuel */
 public class Inscription3Servlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,7 +71,6 @@ public class Inscription3Servlet extends HttpServlet {
 
         UserLibrary.getInstance().addParticipant(participant);
 
-        response.sendRedirect("index");
 
 /* Si les mots de passes sont les mêmes, ont est redirigé vers l'index, sinon un message s'affiche pour nous indiquez que les mots de passes renseignés ne correspondent pas*/
         if(mdp1.equals(mdp2)){
@@ -78,7 +79,7 @@ public class Inscription3Servlet extends HttpServlet {
         } else{
             response.sendRedirect("Les mots de passes ne correspondent pas !");
         }
-
+ /* Test de connexion */
         try {
             String host = "smtp.office365.com";
             String user = "";
@@ -189,7 +190,7 @@ public class Inscription3Servlet extends HttpServlet {
         out.println("                    break;");
 
 
-        out.println("  case 3:");
+        out.println("  case 1:");
 
         // Chiffres seulement, c'est idéal pour les numéros de téléphone, les âges, les codes postaux
 
@@ -263,7 +264,7 @@ public class Inscription3Servlet extends HttpServlet {
                 "      <option value=\"F\">Féminin</option>\n" +
                 "      <option value=\"M\">Masculin</option>\n" +
                 "    </select>\n" +
-                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,3);\" >\n" +
+                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,1);\" >\n" +
                 "    <label>Statut</label>\n" +
                 "    <select name=\"statut\">\n" +
                 "      <option value=\"etudiant\">Etudiant</option>\n" +
@@ -271,7 +272,7 @@ public class Inscription3Servlet extends HttpServlet {
                 "    </select>\n" +
                 "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
                 "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required onKeyPress=\"return verifieChar(event,0);\">\n" +
-                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,3);\">\n" +
+                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,1);\">\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
                 "      <option value=\"1\">Oui</option>\n" +
