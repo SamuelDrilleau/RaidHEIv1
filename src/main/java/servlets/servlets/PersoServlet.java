@@ -21,6 +21,8 @@ import java.io.*;
 
 @WebServlet(name = "perso")
 @MultipartConfig
+/* Page personnelle et privé de l'utilisateur */
+
 public class PersoServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,7 +68,9 @@ public class PersoServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         PrintWriter out = response.getWriter();
-
+        
+/* Cette page permet à l'utilisateur d'accèder à ses données et de changer certains paramètres le concernant comme par exemple s'il a payé les quelconques cotisations */
+        
         out.println("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<title>Raid HEI - Le Raid</title>\n" +
