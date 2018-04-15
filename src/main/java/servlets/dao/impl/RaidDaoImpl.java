@@ -8,6 +8,8 @@ import java.sql.*;
 public class RaidDaoImpl implements RaidDao{
 
     @Override
+     /* Cette fonction permet d'ajouter un raid à la base de données */
+    
     public void addRaid(Raid raid) {
         String query ="INSERT INTO Raid(id,debut,fin,changement,contactMail,contactTel,lieu,presentation,prixCaution,prixEtudiantE,prixEtudiantL,prixExterneE,prixExterneL,nomCom1,mailCom1,nomCom2,mailCom2,epreuveV1,epreuveV2,epreuveS1,epreuveS2,epreuveS3,epreuveD1,epreuveD2,equipeImg,plaquetteImg,ancienImg) VALUES(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -46,8 +48,26 @@ public class RaidDaoImpl implements RaidDao{
         }
 
     }
+        @Override
+        /* Cette fonction permet de supprimer une équipe à la base de données */
+
+    public Raid delRaid() {
+        String query = "DELETE FROM Raid WHERE id=0;";
+        try{
+            Connection connection = DataSourceProvider.getDataSource().getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
+    
+    /* Cette fonction permet de supprimer une équipe à la base de données */
+    
     public Raid getRaid(int id) {
         String query = "SELECT * FROM Raid WHERE id=0";
         try{
