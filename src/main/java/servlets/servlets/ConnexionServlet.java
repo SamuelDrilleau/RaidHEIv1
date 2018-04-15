@@ -20,12 +20,15 @@ import static java.lang.System.out;
 
 
 @WebServlet("/connexion")
+
+/* Page de connexion au raid */
+
 public class ConnexionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mailFormulaire = request.getParameter("email");
         String mdpFormulaire = DigestUtils.sha256Hex(request.getParameter("mdp"));
         Participant participant = UserLibrary.getInstance().participantByMail(mailFormulaire);
-
+// connexion
         if (participant != null) {
             if (mdpFormulaire.equals(participant.getMdp()) && mailFormulaire.equals(participant.getMail())) {
                 request.getSession().setAttribute("utilisateurConnecte", mailFormulaire);
