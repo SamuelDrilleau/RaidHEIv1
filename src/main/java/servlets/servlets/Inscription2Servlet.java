@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.Properties;
 
 @WebServlet("/inscription2")
+
+/* Page permettant de s'inscrire au site et de rejoindre une équipe */
 public class Inscription2Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mail;
@@ -43,11 +45,11 @@ public class Inscription2Servlet extends HttpServlet {
         int bus;
         String tshirt;
         int fftri;
+        String Equipe;
 
 
         String nomEquipe1;
         String mdpE1;
-        String mdpE2;
         String typeRaid;
 
         mail= request.getParameter("email");
@@ -66,12 +68,14 @@ public class Inscription2Servlet extends HttpServlet {
         bus=Integer.parseInt(request.getParameter("bus"));
         tshirt=request.getParameter("tshirt");
         fftri=Integer.parseInt(request.getParameter("fftri"));
+        Equipe=request.getParameter("equipe");
 
         nomEquipe1=request.getParameter("nomEquipe1");
         mdpE1=DigestUtils.sha256Hex(request.getParameter("mdpE1"));
-        mdpE2=DigestUtils.sha256Hex(request.getParameter("mdpE2"));
         typeRaid=request.getParameter("typeRaid");
 
+
+        /* Si les mots de passes sont les mêmes, ont est redirigé vers l'index, sinon un message s'affiche pour nous indiquez que les mots de passes renseignés ne correspondent pas*/
 
         if(mdp1.equals(mdp2)){
             request.getSession().setAttribute("mdp",mdp2);
@@ -85,7 +89,8 @@ public class Inscription2Servlet extends HttpServlet {
 
         UserLibrary.getInstance().addParticipant(participant);
 
-        response.sendRedirect("index");
+
+ /* Test de connexion */
 
         try {
             String host = "smtp.office365.com";
@@ -104,7 +109,6 @@ public class Inscription2Servlet extends HttpServlet {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.required", "true");
-
 
             Session mailSession = Session.getDefaultInstance(props, null);
             mailSession.setDebug(sessionDebug);
@@ -133,7 +137,7 @@ public class Inscription2Servlet extends HttpServlet {
         PrintWriter out=response.getWriter();
 
         out.println("<!DOCTYPE html>\n" +
-                "<html>\n" +
+                "<html  xmlns:th=\"http://www.thymeleaf.org\">\n" +
                 "<title>Raid HEI - Le Raid</title>\n" +
                 "<meta charset=\"UTF-8\">\n" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
@@ -170,9 +174,9 @@ public class Inscription2Servlet extends HttpServlet {
 
 
         /*Fonction qui vérifie que le caractère inscrit est alphabétique
-         @param evenement est l'événement fournis par le keypress
-         @param type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 1 pour bloquer lettres
-         @return true si le caractère est correct
+         Evenement est l'événement fournis par le keypress
+         Type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 3 pour bloquer lettres
+        On retourne true si le caractère est correct
          */
         out.println("                function verifieChar(evenement,type){");
         out.println("            var charCode;");
@@ -197,7 +201,7 @@ public class Inscription2Servlet extends HttpServlet {
         out.println("                    }");
         out.println("                    break;");
 
-        out.println("  case 3:");
+        out.println("  case 1:");
 
         // Chiffres seulement, c'est idéal pour les numéros de téléphone, les ages, les codes postaux
 
@@ -207,8 +211,10 @@ public class Inscription2Servlet extends HttpServlet {
         out.println("        return false;");
         out.println("          }");
         out.println("         break;");
-        out.println("            }//fermeture du switch");
-        out.println("        }//fermeture de la fonction");
+        out.println("            }");
+        //fermeture du switch
+        out.println("        }");
+        //fermeture de la fonction
 
         out.println("</script>"+
                 "\n" +
@@ -270,7 +276,7 @@ public class Inscription2Servlet extends HttpServlet {
                 "      <option value=\"F\">Féminin</option>\n" +
                 "      <option value=\"M\">Masculin</option>\n" +
                 "    </select>\n" +
-                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,3);\" >\n" +
+                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\" required onKeyPress=\"return verifieChar(event,1);\" >\n" +
                 "    <label>Statut</label>\n" +
                 "    <select name=\"statut\">\n" +
                 "      <option value=\"etudiant\">Etudiant</option>\n" +
@@ -278,7 +284,7 @@ public class Inscription2Servlet extends HttpServlet {
                 "    </select>\n" +
                 "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" required onKeyPress=\"return verifieChar(event,0);\" >\n" +
                 "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" required onKeyPress=\"return verifieChar(event,0);\" >\n" +
-                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,3);\" >\n" +
+                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" required onKeyPress=\"return verifieChar(event,1);\" >\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
                 "      <option value=\"1\">Oui</option>\n" +
@@ -309,14 +315,16 @@ public class Inscription2Servlet extends HttpServlet {
                 "\n" +
                 "      <label>Nom de l'équipe</label>\n" +
                 "      <select=\"nomEquipe1\">\n");
-               ArrayList<Equipe> list = UserLibrary.getInstance().getAllEquipe();
-                for(int i=0;i<list.size();i++){
-                    if (!list.get(i).getNom().equals("Indiv")){
-                        out.println("<option>");
-                        out.println(list.get(i).getNom());
-                        out.println("</option>");
-                    }
-                }
+
+        /* Récupération des noms d'équipes déjà inscrites */
+               WebContext context = new WebContext(request,response,request.getServletContext());
+               ArrayList<Equipe> listEquipe = UserLibrary.getInstance().getAllEquipe();
+               context.setVariable("nomEquipe1", listEquipe);
+
+        out.println("<select name=\"nomEquipe1\">\n" +
+        "<option th:each=\"equipe:${Equipe}\" th:text=\"${equipe.nom}\" th:value=\"${equipe.nom}\">\n" +
+        "</option>\n" +
+        "</select>\n");
                 out.println("</select>");
                 out.println("<label>Mot de passe de l'équipe</label>\n" +
                 "      <input id=\"mdpE1\" type=\"password\" name=\"mdpE1\">\n" +
