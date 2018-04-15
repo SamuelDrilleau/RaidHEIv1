@@ -17,7 +17,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/admin/galerie")
+
+/* page permettant à l'administateur de rajouter des photos au site internet  */
+
 public class GalerieAdminServlet extends HttpServlet {
+    /* Ajouter une photo a la galerie*/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
