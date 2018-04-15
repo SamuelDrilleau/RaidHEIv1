@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/admin/admin")
+
+/* Page d'accueil de l'administateur */
+
 public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
