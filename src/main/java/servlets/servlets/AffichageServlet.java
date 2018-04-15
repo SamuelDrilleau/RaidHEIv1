@@ -13,6 +13,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet("/admin/affichage")
+
+/* Page permettant à l'administrateur d'accèder aux différentes équipes inscrites */
+
 public class AffichageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
