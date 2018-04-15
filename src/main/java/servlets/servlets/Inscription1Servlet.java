@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.Properties;
 
 @WebServlet("/inscription1")
+
+/* Page permettant de s'inscrire sur le site et de créer une équipe */
 public class Inscription1Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mail;
@@ -47,12 +49,11 @@ public class Inscription1Servlet extends HttpServlet {
 
         String nomEquipe1;
         String mdpE1;
-        String mdpE2;
         String typeRaid;
 
         mail= request.getParameter("email");
-        mdp1 = DigestUtils.sha256Hex(request.getParameter("mdp1"));
-        mdp2 = DigestUtils.sha256Hex(request.getParameter("mdp2"));
+        mdp1 = request.getParameter("mdp1");
+        mdp2 = request.getParameter("mdp2");
         nom= request.getParameter("nom");
         prenom= request.getParameter("prenom");
         sexe= request.getParameter("sexe");
@@ -68,9 +69,17 @@ public class Inscription1Servlet extends HttpServlet {
         fftri=Integer.parseInt(request.getParameter("fftri"));
 
         nomEquipe1=request.getParameter("nomEquipe1");
-        mdpE1=DigestUtils.sha256Hex(request.getParameter("mdpE1"));
-        mdpE2=DigestUtils.sha256Hex(request.getParameter("mdpE2"));
+        mdpE1=request.getParameter("mdpE1");
         typeRaid=request.getParameter("typeRaid");
+
+                /* Si les mots de passes sont les mêmes, ont est redirigé vers l'index, sinon un message s'affiche pour nous indiquez que les mots de passes renseignés ne correspondent pas*/
+
+        if(mdp1.equals(mdp2)){
+            request.getSession().setAttribute("mdp",mdp2);
+            response.sendRedirect("index");
+        } else{
+            response.sendRedirect("Les mots de passes ne correspondent pas !");
+        }
 
 
         Equipe equipe = new Equipe(nomEquipe1,mdpE1,typeRaid);
@@ -81,8 +90,8 @@ public class Inscription1Servlet extends HttpServlet {
 
         UserLibrary.getInstance().addParticipant(participant);
 
-        response.sendRedirect("index");
 
+         /* Test de connexion */
         try {
             String host = "smtp.office365.com";
             String user = "";
@@ -168,9 +177,9 @@ public class Inscription1Servlet extends HttpServlet {
 
 
 /*Fonction qui vérifie que le caractère inscrit est alphabétique
-    @param evenement est l'événement fournis par le keypress
-    @param type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 1 pour bloquer lettres
-    @return true si le caractère est correct
+     Evenement est l'événement fournis par le keypress
+     Type est le type de caractère qu'on souhaite bloquer: 0 pour bloquer chiffres, 3 pour bloquer lettres
+   On retourne true si le caractère est correct
          */
 
         out.println("                function verifieChar(evenement,type){");
@@ -196,7 +205,7 @@ public class Inscription1Servlet extends HttpServlet {
         out.println("                    break;");
 
 
-        out.println("  case 3:");
+        out.println("  case 1:");
                     // Chiffres seulement, c'est idéal pour les numéros de téléphone, les ages, les codes postaux
         out.println("         if(charCode >=48 && charCode <= 57) { ");
         out.println("          return true;");
@@ -204,8 +213,10 @@ public class Inscription1Servlet extends HttpServlet {
         out.println("        return false;");
         out.println("          }");
         out.println("         break;");
-        out.println("            }//fermeture du switch");
-        out.println("        }//fermeture de la fonction");
+        out.println("            }");
+        //fermeture du switch
+        out.println("        }");
+        //fermeture de la fonction
 
         out.println("</script>"+
 
@@ -270,7 +281,7 @@ public class Inscription1Servlet extends HttpServlet {
                 "      <option value=\"F\">Féminin</option>\n" +
                 "      <option value=\"M\">Masculin</option>\n" +
                 "    </select>\n" +
-                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\"  onKeyPress=\"return verifieChar(event,3);\" required  >\n" +
+                "    <label>Numéro de portable</label><input type=\"tel\" name=\"tel\"  onKeyPress=\"return verifieChar(event,1);\" required  >\n" +
                 "    <label>Statut</label>\n" +
                 "    <select name=\"statut\">\n" +
                 "      <option value=\"etudiant\">Etudiant</option>\n" +
@@ -278,26 +289,26 @@ public class Inscription1Servlet extends HttpServlet {
                 "    </select>\n" +
                 "    <label>Nom de votre école ou de votre entreprise</label><input type=\"text\" name=\"ent/ecole\" onKeyPress=\"return verifieChar(event,0);\" required>\n" +
                 "    <label>Nom de la personne à contacter en cas d'urgrence</label><input type=\"text\" name=\"nomUrg\" onKeyPress=\"return verifieChar(event,0);\" required>\n" +
-                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" onKeyPress=\"return verifieChar(event,3);\"  required >\n" +
+                "    <label>Numéro de la personne à contacter en cas d'urgence</label><input type=\"tel\" name=\"telUrg\" onKeyPress=\"return verifieChar(event,1);\"  required >\n" +
                 "    <label>Cotisant BDS HEI ?</label>\n" +
                 "    <select name=\"bds\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "    <label>Amenez-vous votre propre VTT ?</label>\n" +
                 "    <select name=\"vtt\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "    <label>Venez-vous avec le bus mis à votre disposition ?</label>\n" +
                 "    <select name=\"bus\">\n" +
-                "      <option value=\"oui\">Oui</option>\n" +
-                "      <option value=\"non\">Non</option>\n" +
+                "      <option value=\"1\">Oui</option>\n" +
+                "      <option value=\"0\">Non</option>\n" +
                 "    </select>\n" +
                 "      <label>Etes-vous membre de la FFTri ?</label>\n" +
                 "      <select name=\"fftri\">\n" +
-                "          <option value=\"oui\">Oui</option>\n" +
-                "          <option value=\"non\">Non</option>\n" +
+                "          <option value=\"1\">Oui</option>\n" +
+                "          <option value=\"0\">Non</option>\n" +
                 "      </select>\n" +
                 "    <label>Quelle est votre taille de t-shit ?</label>\n" +
                 "    <select name=\"tshirt\">\n" +
@@ -311,8 +322,6 @@ public class Inscription1Servlet extends HttpServlet {
                 "      <input id=\"nomEquipe1\" name=\"nomEquipe1\" type=\"text\" required >\n" +
                 "      <label>Mot de passe de l'équipe</label>\n" +
                 "      <input id=\"mdpE1\" type=\"password\" name=\"mdpE1\" required >\n" +
-                "      <label>Confirmer le mot de passe de l'équipe</label>\n" +
-                "      <input id=\"mdpE2\" type=\"password\" name=\"mdpE2\" required >\n" +
                 "      <label>Type de raid</label>\n" +
                 "      <select name=\"typeRaid\">\n" +
                 "        <option value=\"Aventure\">Aventure</option>\n" +
