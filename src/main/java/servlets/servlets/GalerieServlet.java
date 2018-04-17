@@ -13,9 +13,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet("/galerie")
-
-/* Page permettant de consulter les photos des différentes éditions du raid */
-
 public class GalerieServlet extends HttpServlet {
     int annee;
 
@@ -138,7 +135,7 @@ public class GalerieServlet extends HttpServlet {
                         "\t\t</select>\n" +
                         "\t\t<input type=\"submit\" name=\"submit\">\n" +
                         "\t</form>");
-/* Récupérer les photos dans la UserLibrary */
+
                 ArrayList<Photo> list = UserLibrary.getInstance().getAllPhoto(annee);
                 for (int i=0; i<list.size(); i++){
                     out.println("<img src=\"C:/Users/DRILLEAU/Desktop/"); out.println(list.get(i).getNom()); out.println("\">");

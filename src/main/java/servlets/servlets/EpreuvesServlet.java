@@ -15,9 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/epreuves")
-
-
-/* */
 public class EpreuvesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

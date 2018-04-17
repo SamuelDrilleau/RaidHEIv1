@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html>
 <title>Raid HEI - Le Raid</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,19 +72,19 @@ input[name=showForm]:checked + label { background-color: #4CAF50; color: #f2f2f2
 <!-- Page content -->
 <div class="container">
 
-  <form name="formulaire">
+  <form>
     <label >E-mail</label>
-    <input type="email" name="email" required="" >
+    <input type="email" name="email" required="">
     <label>Mot de passe</label><input type="password" name="mdp1" required="">
     <label>Confirmer le mot de passe</label><input type="password" name="mdp2" required="">
-    <label>Nom</label><input type="text" name="nom" required="" >
-    <label>Prénom</label><input type="text" name="prenom" required="" >
+    <label>Nom</label><input type="text" name="nom" required="">
+    <label>Prénom</label><input type="text" name="prenom" required="">
     <label>Sexe</label>
     <select name="sexe">
       <option value="F">Féminin</option>
       <option value="M">Masculin</option>
     </select>
-    <label>Numéro de portable</label><input type="tel" name="tel" required="" onKeyUp="verifTel(this)">
+    <label>Numéro de portable</label><input type="tel" name="tel" required="">
     <label>Statut</label>
     <select>
       <option value="etudiant">Etudiant</option>
@@ -92,7 +92,7 @@ input[name=showForm]:checked + label { background-color: #4CAF50; color: #f2f2f2
     </select>
     <label>Nom de votre école ou de votre entreprise</label><input type="text" name="ent/ecole" required="">
     <label>Nom de la personne à contacter en cas d'urgrence</label><input type="text" name="nomUrg" required="">
-    <label>Numéro de la personne à contacter en cas d'urgence</label><input type="tel" name="telUrg" required=""onKeyUp="verifTel(this)">
+    <label>Numéro de la personne à contacter en cas d'urgence</label><input type="tel" name="telUrg" required="">
     <label>Cotisant BDS HEI ?</label>
     <select name="bds">
       <option value="oui">Oui</option>
@@ -130,9 +130,11 @@ input[name=showForm]:checked + label { background-color: #4CAF50; color: #f2f2f2
 
     <div id=form1 class="displayondemand">
       <label>Nom de l'équipe</label>
-      <input name="nomEquipe1" type=text value="" onblur="verifNomEquipe(this)">
+      <input name="nomEquipe1" type=text value="">
       <label>Mot de passe de l'équipe</label>
-      <input type="password" name="mdpE1" required="" >
+      <input type="password" name="mdpE1" required="">
+      <label>Confirmer le mot de passe del'équipe</label>
+      <input type="password" name="mdpE2" required="">
       <label>Type de raid</label>
       <select>
         <option value="Aventure">Aventure</option>
@@ -142,10 +144,8 @@ input[name=showForm]:checked + label { background-color: #4CAF50; color: #f2f2f2
 
     <div id=form2 class="displayondemand">
       <label>Equipe à rejoindre</label>
-      <select name="nomEquipe1">
-        <option th:each="equipe:${nomEquipe1}" th:text="${equipe.nom}" th:value="${equipe.nom}">
+      <select name="nomEquipe2">
 
-        </option>
       </select>
       <label>Mot de passe de l'équipe</label>
       <input type="password" name="mdpE" required="">
