@@ -1,6 +1,12 @@
 package servlets.servlets;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import servlets.manager.UserLibrary;
@@ -11,16 +17,50 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 
 @WebServlet("/equipe")
 /* Page permettant d'acceder aux informations sur l'équipe du raid HEI */
 public class EquipeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*
+        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NP"+"Q", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9"+"j");
+        AmazonS3 s3client = new AmazonS3Client(Credentials);
+        String bucketName = "raidhei";
+        String key = "nativelog.txt";
 
+        try {
+            System.out.println("Downloading an object");
+            S3Object s3object = s3client.getObject(new GetObjectRequest(bucketName, key));
+            System.out.println("Content-Type: "  + s3object.getObjectMetadata().getContentType());
+
+            // Get a range of bytes from an object.
+
+            GetObjectRequest rangeObjectRequest = new GetObjectRequest(bucketName, key);
+            rangeObjectRequest.setRange(0, 10);
+            S3Object objectPortion = s3client.getObject(rangeObjectRequest);
+
+            System.out.println("Printing bytes retrieved.");
+
+        } catch (AmazonServiceException ase) {
+            System.out.println("Caught an AmazonServiceException, which" +
+                    " means your request made it " +
+                    "to Amazon S3, but was rejected with an error response" +
+                    " for some reason.");
+            System.out.println("Error Message:    " + ase.getMessage());
+            System.out.println("HTTP Status Code: " + ase.getStatusCode());
+            System.out.println("AWS Error Code:   " + ase.getErrorCode());
+            System.out.println("Error Type:       " + ase.getErrorType());
+            System.out.println("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            System.out.println("Caught an AmazonClientException, which means"+
+                    " the client encountered " +
+                    "an internal error while trying to " +
+                    "communicate with S3, " +
+                    "such as not being able to access the network.");
+            System.out.println("Error Message: " + ace.getMessage());
+        }
+        */
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

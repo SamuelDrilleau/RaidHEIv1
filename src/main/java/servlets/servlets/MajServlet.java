@@ -76,7 +76,6 @@ public class MajServlet extends HttpServlet {
 
         System.out.println(label1+" "+label2+" "+label3);
 
-        /*
         String fichier = "";
 
         if (label2==null && label3==null) {
@@ -87,7 +86,7 @@ public class MajServlet extends HttpServlet {
             fichier = "ancien";
         }
 
-        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NPQ0", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9j0");
+        AWSCredentials Credentials = new BasicAWSCredentials("AKIAJVBODKWB2ZFE3NP"+"Q", "OHWVrEpcm6P4Gzh7rGlQIsw6IP0qfzgyB6KOuw9"+"j");
         UploadObjectSingleOperation S3client = new UploadObjectSingleOperation();
 
         Part filePart = request.getPart(fichier); // Retrieves <input type="file" name="file">
@@ -98,7 +97,6 @@ public class MajServlet extends HttpServlet {
         metadata.setContentLength(fileContent.available());
 
         S3client.uploadfile(Credentials, "majRaid/" + fichier, fileContent, metadata);
-        */
 
         response.sendRedirect("/admin/admin");
     }
@@ -117,8 +115,7 @@ public class MajServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "    <link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normal.css\">\n" +
-                "    <link rel=\"stylesheet\" href=\"../css/genreal.css\">\n" +
+                "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/inscriptions.css\">\n"+
                 "</head>\n" +
                 "<body>\n" +
                 "<nav class=\"w3-top\">\n" +
@@ -127,28 +124,28 @@ public class MajServlet extends HttpServlet {
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
                 "      <button class=\"w3-padding-large w3-button\" title=\"More\">LE RAID</button>     \n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                "        <a href=\"equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
-                "        <a href=\"lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
-                "        <a href=\"precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
-                "        <a href=\"epreuves\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
+                "        <a href=\"../equipe\" class=\"w3-bar-item w3-button\">L'EQUIPE</a>\n" +
+                "        <a href=\"../lieu\" class=\"w3-bar-item w3-button\">LE LIEU</a>\n" +
+                "        <a href=\"../precedent\" class=\"w3-bar-item w3-button\">RAIDS PRECEDENTS</a>\n" +
+                "        <a href=\"../epreuves\" class=\"w3-bar-item w3-button\">EPREUVES</a>\n" +
                 "      </div>\n" +
                 "    </div>\n" +
-                "    <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
-                "    <a href=\"engagements\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">ENGAGEMENTS</a>\n" +
+                "    <a href=\"../partenariat\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">PARTENARIATS</a>\n" +
+                "    <a href=\"../engagements\" class=\"w3-bar-item w3-button w3-padding-large w3-hide-small\">ENGAGEMENTS</a>\n" +
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
                 "      <button class=\"w3-padding-large w3-button\" title=\"More\">INFORMATIONS</button>     \n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                "        <a href=\"infos\" class=\"w3-bar-item w3-button\">INFOS PRATIQUES</a>\n" +
-                "        <a href=\"materiel\" class=\"w3-bar-item w3-button\">MATERIEL</a>\n" +
-                "        <a href=\"galerie\" class=\"w3-bar-item w3-button\">GALERIE</a>\n" +
+                "        <a href=\"../infos\" class=\"w3-bar-item w3-button\">INFOS PRATIQUES</a>\n" +
+                "        <a href=\"../materiel\" class=\"w3-bar-item w3-button\">MATERIEL</a>\n" +
+                "        <a href=\"../galerie\" class=\"w3-bar-item w3-button\">GALERIE</a>\n" +
                 "      </div>\n" +
                 "    </div>\n" +
                 "    <div class=\"w3-dropdown-hover w3-hide-small\">\n" +
                 "      <button class=\"w3-padding-large w3-button\" title=\"More\">INSCRIPTIONS</button>\n" +
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
-                "        <a href=\"inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
-                "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
-                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
+                "        <a href=\"../inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
+                "        <a href=\"../inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
+                "        <a href=\"../inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
                 "      </div>\n" +
                 "       </div>"+
                 "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
@@ -191,13 +188,13 @@ public class MajServlet extends HttpServlet {
                 "                <div>\n" +
                 "                    <label>Contact Com 1</label>\n" +
                 "                    <input type=\"text\" name=\"nomCom1\" placeholder=\"NOM Prénom\" required=>\n" +
-                "                    <input type=\"email\" name=\"mailCom1\" placeholder=\"email\" required=>\" \n" +
+                "                    <input type=\"email\" name=\"mailCom1\" placeholder=\"email\" required=> \n" +
                 "                </div>\n" +
                 "                 \n" +
                 "                <div> \n" +
                 "                    <label>Contact Com 2</label>\n" +
                 "                    <input type=\"text\" name=\"nomCom2\" placeholder=\"NOM Prénom\" required=>\n" +
-                "                    <input type=\"email\" name=\"mailCom2\" placeholder=\"email\" required=>\" \n" +
+                "                    <input type=\"email\" name=\"mailCom2\" placeholder=\"email\" required=> \n" +
                 "                </div>\n" +
                 "                 \n" +
                 "                <label>Epreuve 1 vendredi</label>\n" +
