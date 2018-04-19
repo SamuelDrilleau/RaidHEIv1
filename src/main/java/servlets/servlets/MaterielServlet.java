@@ -35,55 +35,7 @@ public class MaterielServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "<style>\n" +
-                "/* Style inputs with type=\"text\", select elements and textareas */\n" +
-                "input[type=text], select, textarea, input[type=\"tel\"], input[type=\"password\"], input[type=\"email\"] {\n" +
-                "    width: 100%; /* Full width */\n" +
-                "    padding: 12px; /* Some padding */ \n" +
-                "    border: 1px solid #ccc; /* Gray border */\n" +
-                "    border-radius: 4px; /* Rounded borders */\n" +
-                "    box-sizing: border-box; /* Make sure that padding and width stays in place */\n" +
-                "    margin-top: 6px; /* Add a top margin */\n" +
-                "    margin-bottom: 16px; /* Bottom margin */\n" +
-                "    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */\n" +
-                "}\n" +
-                "\n" +
-                "/* Style the submit button with a specific background color etc */\n" +
-                "input[type=submit] {\n" +
-                "    background-color: #4CAF50;\n" +
-                "    color: white;\n" +
-                "    padding: 12px 20px;\n" +
-                "    border: none;\n" +
-                "    border-radius: 4px;\n" +
-                "    cursor: pointer;\n" +
-                "}\n" +
-                "\n" +
-                "/* When moving the mouse over the submit button, add a darker green color */\n" +
-                "input[type=submit]:hover {\n" +
-                "    background-color: #45a049;\n" +
-                "}\n" +
-                "\n" +
-                "/* Add a background color and some padding around the form */\n" +
-                ".container {\n" +
-                "    border-radius: 5px;\n" +
-                "    background-color: #f2f2f2;\n" +
-                "    padding: 20px;\n" +
-                "    width: 35%;\n" +
-                "    margin-top: 10%;\n" +
-                "    margin-bottom: 10%;\n" +
-                "    margin-right: auto;\n" +
-                "    margin-left: auto;\n" +
-                "}\n" +
-                "\n" +
-                "footer{\n" +
-                "    background-color: #fff;\n" +
-                "    width:100%;\n" +
-                "    z-index:1\n" +
-                "}\n" +
-                "\n" +
-                "\n" +
-                "\n"+
-                "</style>"+
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normal.css\">\n" +
                 "<link rel=\"stylesheet\" href=\"css/genreal.css\">\n" +
                 "<link type=\"text/javascript\" src=\"js/script.js\">\n" +
                 "<body>\n" +

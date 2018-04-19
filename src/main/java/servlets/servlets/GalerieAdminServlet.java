@@ -55,8 +55,8 @@ public class GalerieAdminServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/inscriptions.css\">\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/general.css\">\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/inscriptions.css\">\n" +
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
                 "<body>\n" +
                 "\n" +

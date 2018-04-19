@@ -88,11 +88,19 @@ public class ConnexionServlet extends HttpServlet {
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
                 "        <a href=\"inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
-                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
+                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTION SOLO</a>\n" +
                 "      </div>\n" +
                 "       </div>"+
                 "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
                 "  </div>\n" +
+                "</nav>\n" +
+                "\n" +
+                "<!-- Navbar on small screens -->\n" +
+                "<nav id=\"navDemo\" class=\"w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top\" style=\"margin-top:46px\">\n" +
+                "  <a href=\"#\" class=\"w3-bar-item w3-button w3-padding-large\">LE RAID</a>\n" +
+                "  <a href=\"partenariat\" class=\"w3-bar-item w3-button w3-padding-large\">PARTENARIATS</a>\n" +
+                "  <a href=\"#\" class=\"w3-bar-item w3-button w3-padding-large\">INSCRIPTIONS / CONNEXION</a>\n" +
+                "  <a href=\"infos\" class=\"w3-bar-item w3-button w3-padding-large\">INFORMATIONS</a>\n" +
                 "</nav>\n");
 
         String pseudoUtilisateurConnecte = (String) request.getSession().getAttribute("utilisateurConnecte");

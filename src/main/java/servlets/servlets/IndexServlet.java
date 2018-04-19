@@ -44,55 +44,8 @@ public class IndexServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" +
                 "<link rel=\"icon\" href=\"images/logo.png\">\n" +
-                "<style>\n" +
-                "/* Style inputs with type=\"text\", select elements and textareas */\n" +
-                "input[type=text], select, textarea, input[type=\"tel\"], input[type=\"password\"], input[type=\"email\"] {\n" +
-                "    width: 100%; /* Full width */\n" +
-                "    padding: 12px; /* Some padding */ \n" +
-                "    border: 1px solid #ccc; /* Gray border */\n" +
-                "    border-radius: 4px; /* Rounded borders */\n" +
-                "    box-sizing: border-box; /* Make sure that padding and width stays in place */\n" +
-                "    margin-top: 6px; /* Add a top margin */\n" +
-                "    margin-bottom: 16px; /* Bottom margin */\n" +
-                "    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */\n" +
-                "}\n" +
-                "\n" +
-                "/* Style the submit button with a specific background color etc */\n" +
-                "input[type=submit] {\n" +
-                "    background-color: #4CAF50;\n" +
-                "    color: white;\n" +
-                "    padding: 12px 20px;\n" +
-                "    border: none;\n" +
-                "    border-radius: 4px;\n" +
-                "    cursor: pointer;\n" +
-                "}\n" +
-                "\n" +
-                "/* When moving the mouse over the submit button, add a darker green color */\n" +
-                "input[type=submit]:hover {\n" +
-                "    background-color: #45a049;\n" +
-                "}\n" +
-                "\n" +
-                "/* Add a background color and some padding around the form */\n" +
-                ".container {\n" +
-                "    border-radius: 5px;\n" +
-                "    background-color: #f2f2f2;\n" +
-                "    padding: 20px;\n" +
-                "    width: 35%;\n" +
-                "    margin-top: 10%;\n" +
-                "    margin-bottom: 10%;\n" +
-                "    margin-right: auto;\n" +
-                "    margin-left: auto;\n" +
-                "}\n" +
-                "\n" +
-                "footer{\n" +
-                "    background-color: #fff;\n" +
-                "    width:100%;\n" +
-                "    z-index:1\n" +
-                "}\n" +
-                "\n" +
-                "\n" +
-                "\n"+
-                "</style>"+
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/general.css\">\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normal.css\">\n" +
                 "<script src=\"js/script.js\" type=\"text/javascript\"></script>"+
                 "<body>\n" +
                 "\n" +
@@ -124,7 +77,7 @@ public class IndexServlet extends HttpServlet {
                 "      <div class=\"w3-dropdown-content w3-bar-block w3-card-4\">\n" +
                 "        <a href=\"inscription1\" class=\"w3-bar-item w3-button\">INSCRIPTION ET CREATION D'UNE EQUIPE</a>\n" +
                 "        <a href=\"inscription2\" class=\"w3-bar-item w3-button\">INSCRIPTION ET REJOINDRE UNE EQUIPE</a>\n" +
-                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTIONS SOLO</a>\n" +
+                "        <a href=\"inscription3\" class=\"w3-bar-item w3-button\">INSCRIPTION SOLO</a>\n" +
                 "      </div>\n" +
                 "       </div>"+
                 "    <a href=\"connexion\" class=\"w3-hover-red w3-hide-small w3-right\" style=\"padding: 7px 24px; margin-right:0px;\"><i class=\"fa fa-user-circle fa-2x\"></i></a>\n" +
@@ -144,8 +97,8 @@ public class IndexServlet extends HttpServlet {
                 "\n" +
                 "  <!-- Video -->\n" +
                 "  <div class=\"w3-display-container w3-center\">\n" +
-                "    <video style=\"width:100%\" poster =\"images/logo.png\" controls>\n" +
-                "  \t\t<source src=\"videos/raid2017.ogv\" type=\"video/ogg\">\n" +
+                "    <video style=\"width:100%\" poster =\"images/logo.png\" controls=\"controls\" preload=\"none\">\n" +
+                "  \t\t<source type=\"video/mp4\" src=\"video/raid2017.mp4\">\n" +
                 "    </video>\n" +
                 "  </div>\n" +
                 "\n" +
@@ -154,6 +107,7 @@ public class IndexServlet extends HttpServlet {
                 "    <h2 class=\"w3-wide\">LE RAID</h2>\n" +
                 "    <p class=\"w3-opacity\"><i>Le sport est le dépassement de soi. Le sport est l'école de vie.</i></p>\n" +
                 "    <p class=\"w3-justify\">Chaque année et cela depuis maintenant 23 éditions l'équipe organisatrice vous organise un weekend au coeur de la nature et dans un lieu unique et différent à chaque fois. Articulé autour de disciplines telles que  le trail, le run&bike, la course d'orientation, le VTT et le canoë , ce raid sera là pour prouver que chacun est capable de se dépasser. L'élément moteur de cette association est de vous faire partager sa passion pour le sport en équipe. Au cours de ces deux jours, vous aurez l'occasion de partager des moments forts en émotion avec vos coéquipiers et les autres raideurs.</p>\n" +
+                "      <div class=\"w3-third\">\n" +
                 "        <p>Dépassement de soi</p>\n" +
                 "        <img src=\"images/heart.png\" class=\"w3-round w3-margin-bottom\" style=\"width:60%\">\n" +
                 "      </div>\n" +
@@ -166,7 +120,6 @@ public class IndexServlet extends HttpServlet {
                 "        <img src=\"images/help.png\" class=\"w3-round\" style=\"width:60%\">\n" +
                 "      </div>\n" +
                 "    </div>\n" +
-                "  </div>\n" +
                 "\n" +
                 "  <!-- Sponsors Section -->\n" +
                 "    <div class=\"w3-black\" id=\"tour\">\n" +
